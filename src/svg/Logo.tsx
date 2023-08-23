@@ -1,8 +1,8 @@
 import { FC } from "react";
 
 interface IProps {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
 }
 
 export const Logo: FC<IProps> = ({ width = 141, height = 32 }) => {

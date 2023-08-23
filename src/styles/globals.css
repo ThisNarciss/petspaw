@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-color: #8c8c8c;
+  --foreground-second-color: #1d1d1d;
+  --background-color: #f8f8f7;
+}
+
+@media (prefers-color-scheme: white) {
+  :root {
+    --foreground-rgb: #8c8c8c;
+    --foreground-second-color: #ffffff;
+    --background-color: #1d1d1d;
+  }
+}
+
+body {
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+  font-size: 20px;
+  font-weight: 400;
+}

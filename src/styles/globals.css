@@ -6,6 +6,7 @@
   --foreground-color: #8c8c8c;
   --foreground-second-color: #1d1d1d;
   --background-color: #f8f8f7;
+  --border-purple: rgba(255, 255, 255, 0.6);
 }
 
 @media (prefers-color-scheme: white) {

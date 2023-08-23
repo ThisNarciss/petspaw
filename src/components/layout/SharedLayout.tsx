@@ -1,8 +1,9 @@
 import { Jost } from "next/font/google";
 import { Logo } from "@/svg/Logo";
 import { FC, ReactNode } from "react";
-import { PagesLinkList } from "../link-list/PagesLinkList";
 import Head from "next/head";
+import { Navigation } from "@/components/ui/Navigation";
+import { NAV_LINKS } from "@/utils/constants";
 
 const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -22,13 +23,20 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
         <main className="flex relative  items-start py-[30px] ">
           <section className="sticky top-[30px] px-[137px] h-[auto]">
             <div className="mb-[80px]">
-              <Logo width="147" height="30" />
+              <Logo />
             </div>
             <h1 className="text-[var(--foreground-second-color)] text-[44px] leading-[1.32] font-medium mb-[10px]">
               Hi!👋
             </h1>
             <p className="mb-[60px]">Welcome to MacPaw Bootcamp 2023</p>
-            <PagesLinkList />
+            <div>
+              <h2 className="text-[var(--foreground-second-color)] font-medium mb-[20px]">
+                Lets start using The Cat API
+              </h2>
+              <ul className="flex items-center gap-[16px] uppercase">
+                <Navigation navLinks={NAV_LINKS} />
+              </ul>
+            </div>
           </section>
           {children}
         </main>

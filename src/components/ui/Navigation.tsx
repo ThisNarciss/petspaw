@@ -46,28 +46,35 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
         }
 
         return (
-          <li key={link.name} className="flex flex-col items-center gap-[10px]">
-            <div
-              className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] h-[198px] ${bgColor} ${
-                isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
-              }`}
-            >
-              <Image
-                src={link.src}
-                alt={link.alt}
-                className=""
-                width={link.width}
-                height={link.height}
-                loading="lazy"
-              />
-            </div>
+          <li
+            key={link.name}
+            className="flex group flex-col items-center gap-[10px]"
+          >
             <Link
-              className={`py-[10px] w-[138px] rounded-[10px] text-[12px] font-medium leading-[1.33] text-center hover:bg-[#FBE0DC] hover:text-[#FF868E] ${
-                isActive ? active : inActive
-              }`}
+              className="flex group flex-col items-center gap-[10px]"
               href={link.href}
             >
-              {link.name}
+              <div
+                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] group-hover:border-[#FFFFFF] h-[198px] ${bgColor} ${
+                  isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
+                }`}
+              >
+                <Image
+                  src={link.src}
+                  alt={link.alt}
+                  className=""
+                  width={link.width}
+                  height={link.height}
+                  loading="lazy"
+                />
+              </div>
+              <span
+                className={`py-[10px] w-[138px] rounded-[10px] text-[12px] font-medium leading-[1.33] text-center group-hover:bg-[#FBE0DC] hover:text-[#FF868E] ${
+                  isActive ? active : inActive
+                }`}
+              >
+                {link.name}
+              </span>
             </Link>
           </li>
         );

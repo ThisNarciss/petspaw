@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const Voting = () => {
   return (
-    <section className="flex flex-col gap-[10px]">
+    <section className="flex flex-col gap-[10px] w-full">
       <div className="flex items-center justify-between gap-[10px]">
         <SearchForm />
         <Link
@@ -30,7 +30,7 @@ export const Voting = () => {
         </Link>
       </div>
       <div className="p-[20px] bg-[#FFFFFF] rounded-[20px]">
-        <BackBtn />
+        <BackBtn title="Voting" />
       </div>
     </section>
   );

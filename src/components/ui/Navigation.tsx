@@ -2,8 +2,6 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { getBgColor } from "@/utils/getBgBorderColor";
-import { useRouter } from "next/router";
 
 interface INavLinks {
   navLinks: {
@@ -13,7 +11,6 @@ interface INavLinks {
     width: number;
     height: number;
     alt: string;
-    imgBoxStyle: string;
   }[];
 }
 
@@ -27,13 +24,33 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
 
         let active = "text-[#FFFFFF] bg-[#FF868E]";
         let inActive = "text-[#FF868E] bg-[#FFFFFF]";
+        let bgColor = "";
+        switch (idx) {
+          case 0:
+            bgColor = "bg-[#B4B7FF]";
+
+            break;
+          case 1:
+            bgColor = "bg-[#97EAB9]";
+
+            break;
+          case 2:
+            bgColor = "bg-[#FFD280]";
+
+            break;
+
+          default:
+            bgColor = "bg-[#B4B7FF]";
+
+            break;
+        }
 
         return (
           <li key={link.name} className="flex flex-col items-center gap-[10px]">
             <div
-              className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] h-[198px] ${getBgColor(
-                idx
-              )} ${isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"}`}
+              className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] h-[198px] ${bgColor} ${
+                isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
+              }`}
             >
               <Image
                 src={link.src}

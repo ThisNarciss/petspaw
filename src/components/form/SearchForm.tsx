@@ -28,8 +28,6 @@ export const SearchForm = () => {
     setIsFocused(false);
   };
 
-  console.log(watch("search"));
-
   return (
     <form
       className={`flex items-center justify-between gap-[10px] rounded-[20px] w-[470px] py-[10px] px-[20px] bg-[#ffffff] border-[2px] border-solid hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
@@ -40,14 +38,13 @@ export const SearchForm = () => {
       <div className="relative w-full">
         <input
           onFocus={handleFocus}
-          onChange={onChange} // assign onChange event
+          onChange={onChange}
           onBlur={handleBlur}
           className="placeholder:text-[#8C8C8C] w-full outline-none"
           placeholder="Search for breeds by name"
           defaultValue={watch("search")}
           name={name}
           ref={ref}
-          //   {...register("search", { required: true })}
         />
         {errors.search && (
           <span className="absolute bottom-[-15px] left-0 text-[12px] text-red-600">

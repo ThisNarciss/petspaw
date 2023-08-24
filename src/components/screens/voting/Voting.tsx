@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { FC, useState, useRef, JSXElementConstructor } from "react";
-import { SearchForm } from "@/components/form/SearchForm";
+import { FC, useState, useRef } from "react";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { IProps } from "@/pages/voting";
 import { CatServices } from "@/services/CatServices";
@@ -9,6 +7,10 @@ import { Dislike } from "@/svg/Dislike";
 import { Favorite } from "@/svg/Favorite";
 import { Like } from "@/svg/Like";
 import { LogItem } from "@/components/log-item/LogItem";
+import { useRouter } from "next/router";
+import { DateService } from "@/services/DateService";
+import { FavoriteFill } from "@/svg/FavoriteFill";
+import { CollectionNav } from "@/components/ui/CollectionNav";
 
 interface IFavCat {
   id: number;
@@ -27,10 +29,12 @@ export const Voting: FC<IProps> = ({ cats }) => {
   const [catsData, setCatsData] = useState(cats);
   const actionLogList = useRef<HTMLUListElement | null>(null);
   const [listItems, setListItems] = useState<IListItem[]>([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const { pathname } = useRouter();
 
   const onBtnClickUpVote = async () => {
-    const date = new Date();
-
+    const { hour, min } = DateService.getCurrentTime();
     await CatServices.catVotes(catsData[0].id, 1);
     const updateData = await CatServices.getCats();
     setCatsData(updateData);
@@ -38,13 +42,13 @@ export const Voting: FC<IProps> = ({ cats }) => {
       ...prevState,
       {
         id: catsData[0].id,
-        time: `${date.getHours()}:${date.getMinutes()}`,
+        time: `${hour}:${min}`,
         text: "added to Likes",
       },
     ]);
   };
   const onBtnClickDownVote = async () => {
-    const date = new Date();
+    const { hour, min } = DateService.getCurrentTime();
     await CatServices.catVotes(catsData[0].id, -1);
     const updateData = await CatServices.getCats();
     setCatsData(updateData);
@@ -52,19 +56,18 @@ export const Voting: FC<IProps> = ({ cats }) => {
       ...prevState,
       {
         id: catsData[0].id,
-        time: `${date.getHours()}:${date.getMinutes()}`,
+        time: `${hour}:${min}`,
         text: "added to Dislikes",
       },
     ]);
   };
 
   const onBtnClickToFavorite = async () => {
-    const date = new Date();
+    const { hour, min } = DateService.getCurrentTime();
     const favorite = await CatServices.getFavorite();
     const findFavCat: IFavCat = favorite.find(
       (cat: IFavCat) => cat.image_id === catsData[0].id
     );
-    console.log(findFavCat);
 
     if (!findFavCat) {
       await CatServices.addToFavorite(catsData[0].id);
@@ -72,102 +75,85 @@ export const Voting: FC<IProps> = ({ cats }) => {
         ...prevState,
         {
           id: catsData[0].id,
-          time: `${date.getHours()}:${date.getMinutes()}`,
+          time: `${hour}:${min}`,
           text: "added to Favorites",
         },
       ]);
+      setIsFavorite(true);
     } else {
       await CatServices.delFromFavorite(findFavCat.id);
       setListItems((prevState) => [
         ...prevState,
         {
           id: catsData[0].id,
-          time: `${date.getHours()}:${date.getMinutes()}`,
+          time: `${hour}:${min}`,
           text: "removed from Favorites",
         },
       ]);
+      setIsFavorite(false);
     }
   };
 
   return (
-    <section className="flex flex-col gap-[10px] w-full">
-      <div className="flex items-center justify-between gap-[10px]">
-        <SearchForm />
-        <Link
-          className="p-[15px] rounded-[20px] bg-[#FFFFFF] hover:bg-[#FBE0DC]"
-          href="/likes"
-        >
-          <Like />
-        </Link>
-        <Link
-          className="p-[15px] rounded-[20px] bg-[#FFFFFF] hover:bg-[#FBE0DC]"
-          href="/favorites"
-        >
-          <Favorite />
-        </Link>
-        <Link
-          className="p-[15px] rounded-[20px] bg-[#FFFFFF] hover:bg-[#FBE0DC]"
-          href="/dislikes"
-        >
-          <Dislike />
-        </Link>
-      </div>
-      <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
-        <BackBtn title="Voting" />
-        <div className="relative mb-[52px]">
-          <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden items-center ">
-            <Image
-              className="w-full object-center max-h-[640px]"
-              id={catsData[0].id}
-              src={catsData[0].url}
-              sizes="100vw"
-              alt="cat picture"
-              width={640}
-              height={360}
-            />
-            <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[#FFFFFF] border-solid bg-[#FFFFFF] rounded-[20px]">
-              <li>
-                <button
-                  onClick={onBtnClickUpVote}
-                  className="p-[25px] bg-[#97EAB9] rounded-l-[20px]"
-                >
-                  <Like color="#FFFFFF" />
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={onBtnClickToFavorite}
-                  className="p-[25px] bg-[#FF868E]"
-                >
-                  <Favorite color="#FFFFFF" />
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={onBtnClickDownVote}
-                  className="p-[25px] bg-[#FFD280] rounded-r-[20px]"
-                >
-                  <Dislike color="#FFFFFF" />
-                </button>
-              </li>
-            </ul>
+    <CollectionNav>
+      <section className=" w-full">
+        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+          <BackBtn title="Voting" />
+          <div className="relative mb-[52px]">
+            <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden items-center ">
+              <Image
+                className="w-full object-center max-h-[640px]"
+                id={catsData[0].id}
+                src={catsData[0].url}
+                sizes="100vw"
+                alt="cat picture"
+                width={640}
+                height={360}
+              />
+              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[#FFFFFF] border-solid bg-[#FFFFFF] rounded-[20px]">
+                <li>
+                  <button
+                    onClick={onBtnClickUpVote}
+                    className="p-[25px] bg-[#97EAB9] text-[#FFFFFF] rounded-l-[20px] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
+                  >
+                    <Like />
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={onBtnClickToFavorite}
+                    className={`p-[25px] bg-[#FF868E] text-[#FFFFFF] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
+                  >
+                    {isFavorite ? <FavoriteFill /> : <Favorite />}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={onBtnClickDownVote}
+                    className="p-[25px] bg-[#FFD280] text-[#FFFFFF] fill-current rounded-r-[20px] hover:bg-[#ffd3805a] hover:text-[#FFD280]"
+                  >
+                    <Dislike />
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
+          {Boolean(listItems.length) && (
+            <ul className="flex flex-col gap-[10px]" ref={actionLogList}>
+              {listItems.map((item, idx) => {
+                return (
+                  <LogItem
+                    key={idx}
+                    time={item.time}
+                    id={item.id}
+                    text={item.text}
+                  />
+                );
+              })}
+            </ul>
+          )}
         </div>
-        {Boolean(listItems.length) && (
-          <ul ref={actionLogList}>
-            {listItems.map((item, idx) => {
-              return (
-                <LogItem
-                  key={idx}
-                  time={item.time}
-                  id={item.id}
-                  text={item.text}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </div>
-    </section>
+      </section>
+    </CollectionNav>
   );
 };

@@ -24,3 +24,15 @@ export const NAV_LINKS = [
     alt: "search images",
   },
 ];
+
+export const VOTES_LINKS = [
+  {
+    href: "/likes",
+  },
+  {
+    href: "/favorites",
+  },
+  {
+    href: "/dislikes",
+  },
+];

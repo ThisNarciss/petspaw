@@ -13,6 +13,28 @@ const config: Config = {
       lg: "1440px",
     },
     extend: {
+      gridRowStart: {
+        "8": "8",
+        "9": "9",
+        "10": "10",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+      },
+      gridRowEnd: {
+        "8": "8",
+        "9": "9",
+        "10": "10",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+      },
+      gridTemplateColumns: {
+        "home-columns": "200px 200px 200px",
+      },
+      gridTemplateRows: {
+        "home-rows": "140px 140px 140px 140px 140px 140px 140px 140px 140px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

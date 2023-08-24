@@ -11,7 +11,6 @@ export const CatServices = {
     try {
       const response = await axios.get(`/images/search?limit=15`);
       const data = response.data;
-      console.log(data);
 
       return data;
     } catch (error: any) {
@@ -22,7 +21,6 @@ export const CatServices = {
     try {
       const response = await axios.post("/votes", { image_id, value });
       const data = response.data;
-      console.log(data);
 
       return data;
     } catch (error: any) {
@@ -33,7 +31,6 @@ export const CatServices = {
     try {
       const response = await axios.get("/favourites?limit=15");
       const data = response.data;
-      console.log(data);
 
       return data;
     } catch (error: any) {
@@ -44,7 +41,6 @@ export const CatServices = {
     try {
       const response = await axios.post("/favourites", { image_id });
       const data = response.data;
-      console.log(data);
 
       return data;
     } catch (error: any) {
@@ -55,7 +51,6 @@ export const CatServices = {
     try {
       const response = await axios.delete(`/favourites/${image_id}`);
       const data = response.data;
-      console.log(data);
 
       return data;
     } catch (error: any) {

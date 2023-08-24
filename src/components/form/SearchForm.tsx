@@ -53,7 +53,7 @@ export const SearchForm = () => {
         )}
       </div>
 
-      <button className="p-[10px] bg-[#FBE0DC] rounded-[10px]">
+      <button className="p-[10px] bg-[#FBE0DC] rounded-[10px] text-[#FF868E] fill-current hover:text-[#FFFFFF] hover:bg-[#FF868E]">
         <Search />
       </button>
     </form>

@@ -31,9 +31,34 @@ export const CatServices = {
     try {
       const response = await axios.get("/votes");
       const data = response.data;
-      console.log(data);
 
       return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+  searchBreeds: async (breed: string) => {
+    try {
+      const res = await axios.get(`/breeds`);
+
+      const breedItem = res.data.find((item: { name: string }) =>
+        item.name.includes(breed)
+      );
+
+      const response = await axios.get(
+        `/images/search?limit=15&breed_ids=${breedItem.id}`
+      );
+
+      const data = response.data;
+
+      const newData = data.map(
+        (item: { url: string; id: string; breeds: { name: string }[] }) => ({
+          image: { url: item.url },
+          id: item.id,
+          breeds: { name: item.breeds[0].name },
+        })
+      );
+      return newData;
     } catch (error: any) {
       return error.message;
     }

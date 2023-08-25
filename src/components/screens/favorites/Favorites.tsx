@@ -35,7 +35,7 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
     const id = Number(e.currentTarget.id);
 
     await CatServices.delFromFavorite(id);
-    const data = await CatServices.getFavorite();
+    const data = await CatServices.getFavorite("?limit=15");
     setFav(data);
 
     const { hour, min } = DateService.getCurrentTime();

@@ -64,6 +64,8 @@ export const Voting: FC<IProps> = ({ cats }) => {
   const onBtnClickToFavorite = async () => {
     const { hour, min } = DateService.getCurrentTime();
     const favorite = await CatServices.getFavorite();
+    console.log(favorite);
+
     const findFavCat: IFavCat = favorite.find(
       (cat: IFavCat) => cat.image_id === catsData[0].id
     );

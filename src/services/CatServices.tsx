@@ -17,9 +17,9 @@ export const CatServices = {
       return error.message;
     }
   },
-  getFavorite: async () => {
+  getFavorite: async (limit: string = "") => {
     try {
-      const response = await axios.get("/favourites?limit=15");
+      const response = await axios.get(`/favourites${limit}`);
       const data = response.data;
 
       return data;

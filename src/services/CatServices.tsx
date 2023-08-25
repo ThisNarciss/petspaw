@@ -7,10 +7,11 @@ const API_KEY =
 axios.defaults.params = { api_key: API_KEY };
 
 export const CatServices = {
-  getCats: async () => {
+  getCat: async () => {
     try {
-      const response = await axios.get(`/images/search?limit=15`);
+      const response = await axios.get(`/images/search`);
       const data = response.data;
+      console.log(data);
 
       return data;
     } catch (error: any) {

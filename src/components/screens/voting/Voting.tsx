@@ -35,7 +35,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
   const onBtnClickUpVote = async () => {
     const { hour, min } = DateService.getCurrentTime();
     await CatServices.catVotes(catsData[0].id, 1);
-    const updateData = await CatServices.getCats();
+    const updateData = await CatServices.getCat();
     setCatsData(updateData);
     setListItems((prevState) => [
       ...prevState,
@@ -49,7 +49,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
   const onBtnClickDownVote = async () => {
     const { hour, min } = DateService.getCurrentTime();
     await CatServices.catVotes(catsData[0].id, -1);
-    const updateData = await CatServices.getCats();
+    const updateData = await CatServices.getCat();
     setCatsData(updateData);
     setListItems((prevState) => [
       ...prevState,

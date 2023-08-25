@@ -15,7 +15,7 @@ export interface IProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const cats: IProps = await CatServices.getCats();
+  const cats: IProps = await CatServices.getCat();
 
   return {
     props: {

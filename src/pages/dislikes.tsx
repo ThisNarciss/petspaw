@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const votes = await CatServices.getVotes();
 
   const dislikedCats = votes
-    .filter((vote: ICat) => vote.value === -1)
+    ?.filter((vote: ICat) => vote.value === -1)
     .slice(0, 15);
 
   return {

@@ -18,6 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { favourite },
+    revalidate: 10,
   };
 };
 

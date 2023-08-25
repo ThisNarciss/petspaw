@@ -4,6 +4,7 @@ import { FC, ReactNode } from "react";
 import Head from "next/head";
 import { Navigation } from "@/components/ui/Navigation";
 import { NAV_LINKS } from "@/utils/constants";
+import Link from "next/link";
 
 const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -23,7 +24,9 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
         <main className="flex relative  items-start py-[30px] ">
           <section className="sticky top-[30px] pl-[107px] pr-[137px] h-[auto]">
             <div className="mb-[80px]">
-              <Logo />
+              <Link href="/">
+                <Logo />
+              </Link>
             </div>
             <h1 className="text-[var(--foreground-second-color)] text-[44px] leading-[1.32] font-medium mb-[10px]">
               Hi!👋

@@ -1,6 +1,6 @@
 import { Voting } from "@/components/screens/voting/Voting";
 import { CatServices } from "@/services/CatServices";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { FC } from "react";
 
 interface ICat {
@@ -14,7 +14,7 @@ export interface IProps {
   cats: ICat[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const cats: IProps = await CatServices.getCats();
 
   return {

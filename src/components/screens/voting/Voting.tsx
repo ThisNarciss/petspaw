@@ -27,7 +27,6 @@ interface IListItem {
 
 export const Voting: FC<IProps> = ({ cats }) => {
   const [catsData, setCatsData] = useState(cats);
-  const actionLogList = useRef<HTMLUListElement | null>(null);
   const [listItems, setListItems] = useState<IListItem[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -139,7 +138,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
             </div>
           </div>
           {Boolean(listItems.length) && (
-            <ul className="flex flex-col gap-[10px]" ref={actionLogList}>
+            <ul className="flex flex-col gap-[10px]">
               {listItems.map((item, idx) => {
                 return (
                   <LogItem

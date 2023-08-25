@@ -15,7 +15,7 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
   const { pathname } = useRouter();
 
   return (
-    <div className="flex flex-col gap-[10px]">
+    <div className="flex flex-col gap-[10px] w-full">
       <header className="flex items-center justify-between gap-[10px]">
         <SearchForm />
         {VOTES_LINKS.map((link) => {

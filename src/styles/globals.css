@@ -7,6 +7,7 @@
   --foreground-second-color: #1d1d1d;
   --background-color: #f8f8f7;
   --border-purple: rgba(255, 255, 255, 0.6);
+  --img-hover: rgba(255, 134, 142, 0.6);
 }
 
 @media (prefers-color-scheme: white) {

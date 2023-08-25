@@ -11,6 +11,26 @@ export const CatServices = {
     try {
       const response = await axios.get(`/images/search`);
       const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+  getFavorite: async () => {
+    try {
+      const response = await axios.get("/favourites?limit=15");
+      const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+  getVotes: async () => {
+    try {
+      const response = await axios.get("/votes");
+      const data = response.data;
       console.log(data);
 
       return data;
@@ -28,16 +48,7 @@ export const CatServices = {
       return error.message;
     }
   },
-  getFavorite: async () => {
-    try {
-      const response = await axios.get("/favourites?limit=15");
-      const data = response.data;
 
-      return data;
-    } catch (error: any) {
-      return error.message;
-    }
-  },
   addToFavorite: async (image_id: string) => {
     try {
       const response = await axios.post("/favourites", { image_id });

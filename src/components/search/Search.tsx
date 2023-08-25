@@ -29,7 +29,7 @@ export const Search: FC = () => {
           <p>
             Search results for:{" "}
             <span className="text-[#1D1D1D] font-medium">
-              {searchBreeds[0].breeds?.name}
+              {searchBreeds[0]?.breeds?.name}
             </span>
           </p>
           <CatsGrid catsData={searchBreeds} />

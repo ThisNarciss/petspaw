@@ -43,7 +43,7 @@ export const CatsGrid: FC<IProps> = ({
                 key={item.id}
               >
                 <Image
-                  className="rounded-[20px] object-cover w-full h-full"
+                  className="rounded-[20px] object-center  object-cover w-full h-full"
                   src={item.image.url}
                   alt="cat picture"
                   width={640}

@@ -42,9 +42,11 @@ export const CatServices = {
       const res = await axios.get(`/breeds`);
 
       const breedItem = res.data.find((item: { name: string }) =>
-        item.name.includes(breed)
+        item.name.toLowerCase().includes(breed.toLowerCase())
       );
-
+      if (!breedItem) {
+        return [];
+      }
       const response = await axios.get(
         `/images/search?limit=15&breed_ids=${breedItem.id}`
       );

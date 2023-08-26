@@ -104,7 +104,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
           <div className="relative mb-[52px]">
             <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden items-center ">
               <Image
-                className="w-full object-center max-h-[640px]"
+                className="rounded-[20px] object-center  object-cover w-full h-full"
                 id={catsData[0].id}
                 src={catsData[0].url}
                 sizes="100vw"

@@ -37,27 +37,78 @@ export const CatServices = {
       return error.message;
     }
   },
-  searchBreeds: async (breed: string) => {
+
+  getBreeds: async () => {
+    try {
+      const res = await axios.get(`/breeds`);
+      const data = res.data;
+
+      return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+
+  getBreedsById: async (id: string | string[] | undefined) => {
+    try {
+      const response = await axios.get(
+        `/images/search?limit=5&breed_ids=${id}`
+      );
+
+      const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+  searchBreeds: async (breed: string = "", limit: string = "15") => {
     try {
       const res = await axios.get(`/breeds`);
 
-      const breedItem = res.data.find((item: { name: string }) =>
+      const breedItems = res.data.find((item: { name: string; id: string }) =>
         item.name.toLowerCase().includes(breed.toLowerCase())
       );
-      if (!breedItem) {
-        return [];
+
+      if (!breedItems) {
+        const allBreeds = res.data
+          .map((item: { name: string; id: string }) => item.id)
+          .join(",");
+
+        const response = await axios.get(
+          `/images/search?limit=${limit}&breed_ids=${allBreeds}`
+        );
+
+        const data = response.data;
+        const newData = data.map(
+          (item: {
+            url: string;
+            id: string;
+            breeds: { name: string; id: string }[];
+          }) => ({
+            image: { url: item.url },
+            id: item.id,
+            breeds: { name: item.breeds[0].name, id: item.breeds[0].id },
+          })
+        );
+
+        return newData;
       }
       const response = await axios.get(
-        `/images/search?limit=15&breed_ids=${breedItem.id}`
+        `/images/search?limit=${limit}&breed_ids=${breedItems.id}`
       );
 
       const data = response.data;
 
       const newData = data.map(
-        (item: { url: string; id: string; breeds: { name: string }[] }) => ({
+        (item: {
+          url: string;
+          id: string;
+          breeds: { name: string; id: string }[];
+        }) => ({
           image: { url: item.url },
           id: item.id,
-          breeds: { name: item.breeds[0].name },
+          breeds: { name: item.breeds[0].name, id: item.breeds[0].id },
         })
       );
       return newData;

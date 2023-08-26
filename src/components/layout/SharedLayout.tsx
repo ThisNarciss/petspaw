@@ -22,7 +22,7 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
         className={`lg:container md:container sm:container px-[30px] mx-auto ${jost.className}`}
       >
         <main className="flex relative  items-start py-[30px] ">
-          <section className="sticky top-[30px] pl-[107px] pr-[137px] h-[auto]">
+          <section className="sticky top-[30px] pl-[117px] pr-[137px] h-[auto]">
             <div className="mb-[80px]">
               <Link href="/">
                 <Logo />

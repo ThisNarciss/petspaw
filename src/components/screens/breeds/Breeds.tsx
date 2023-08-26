@@ -1,17 +1,119 @@
-import { SearchForm } from "@/components/form/SearchForm";
 import { BackBtn } from "@/components/ui/BackBtn";
+import { CatsGrid } from "@/components/ui/CatsGrid";
 import { CollectionNav } from "@/components/ui/CollectionNav";
-import { Dislike } from "@/svg/Dislike";
-import { Favorite } from "@/svg/Favorite";
-import { Like } from "@/svg/Like";
-import Link from "next/link";
+import { IProps } from "@/pages/breeds";
+import { CatServices } from "@/services/CatServices";
+import { SortDown } from "@/svg/SortDown";
+import { SortUp } from "@/svg/SortUp";
+import { ICat } from "@/ts/interfaces";
+import { styledSelect } from "@/utils/styledSelect";
 
-export const Breeds = () => {
+import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
+
+interface IOption {
+  readonly value: string;
+  readonly label: string;
+}
+
+const options = [
+  { value: "5", label: "Limit: 5" },
+  { value: "10", label: "Limit: 10" },
+  { value: "15", label: "Limit: 15" },
+  { value: "20", label: "Limit: 20" },
+];
+
+export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
+  const [findBreeds, setFindBreeds] = useState(searchBreeds);
+  const [breed, setBreed] = useState("");
+
+  const { register } = useForm();
+
+  const selectBreedsStyles = styledSelect("226px");
+  const selectLimitStyles = styledSelect("101px");
+
+  const onSortedBtnUpClick = () => {
+    const sortedBreeds = [...findBreeds].sort((a, b) => {
+      const nameA = a.breeds?.name || "";
+      const nameB = b.breeds?.name || "";
+      return nameA.localeCompare(nameB);
+    });
+    setFindBreeds(sortedBreeds);
+  };
+  const onSortedBtnDownClick = () => {
+    const sortedBreeds = [...findBreeds].sort((a, b) => {
+      const nameA = a.breeds?.name || "";
+      const nameB = b.breeds?.name || "";
+      return nameB.localeCompare(nameA);
+    });
+    setFindBreeds(sortedBreeds);
+  };
+
+  const onBreedsChange = async (
+    newValue:
+      | MultiValue<{ value: string; label: string }>
+      | SingleValue<{ value: string; label: string }>
+  ) => {
+    if (newValue !== null) {
+      if ("label" in newValue) {
+        const { label } = newValue;
+        const selectedBreed = await CatServices.searchBreeds(label);
+        setFindBreeds(selectedBreed);
+        setBreed(label);
+      }
+    }
+  };
+  const onLimitsChange = async (
+    newValue:
+      | MultiValue<{ value: string; label: string }>
+      | SingleValue<{ value: string; label: string }>
+  ) => {
+    if (newValue !== null) {
+      if ("value" in newValue) {
+        const { value } = newValue;
+        const selectedBreed = await CatServices.searchBreeds(breed, value);
+        setFindBreeds(selectedBreed);
+      }
+    }
+  };
+
   return (
     <CollectionNav>
-      <section className="flex flex-col gap-[10px] w-full">
+      <section className="flex flex-col gap-[10px] ">
         <div className="p-[20px] bg-[#FFFFFF] rounded-[20px]">
-          <BackBtn title="Breeds" />
+          <div className="flex items-center mb-[20px] gap-[10px]">
+            <BackBtn title="Breeds" />
+            <Select
+              defaultValue={breedsList[0]}
+              options={breedsList}
+              styles={selectBreedsStyles}
+              onChange={onBreedsChange}
+            />
+            <Select
+              defaultValue={options[2]}
+              options={options}
+              styles={selectLimitStyles}
+              onChange={onLimitsChange}
+            />
+            <button
+              onClick={onSortedBtnUpClick}
+              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
+            >
+              <SortUp />
+            </button>
+            <button
+              onClick={onSortedBtnDownClick}
+              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
+            >
+              <SortDown />
+            </button>
+          </div>
+          <CatsGrid
+            catsData={findBreeds}
+            // onClick={onBtnFavClick}
+            isDelBtnNeed
+          />
         </div>
       </section>
     </CollectionNav>

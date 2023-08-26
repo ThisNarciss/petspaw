@@ -33,7 +33,8 @@ const config: Config = {
         "home-columns": "200px 200px 200px",
       },
       gridTemplateRows: {
-        "home-rows": "140px 140px 140px 140px 140px 140px 140px 140px 140px",
+        "home-rows":
+          "140px 140px 140px 140px 140px 140px 140px 140px 140px 140px 140px 140px",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

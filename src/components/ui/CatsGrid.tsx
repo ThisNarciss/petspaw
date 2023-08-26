@@ -1,6 +1,8 @@
 import { FavoriteFill } from "@/svg/FavoriteFill";
 import { ICat } from "@/ts/interfaces";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, MouseEvent, ReactNode } from "react";
 
 interface IProps {
@@ -14,10 +16,12 @@ export const CatsGrid: FC<IProps> = ({
   onClick,
   isDelBtnNeed = false,
 }) => {
+  const { pathname, push } = useRouter();
+
   return (
     <>
       {Boolean(catsData.length) ? (
-        <ul className="grid grid-cols-home-columns grid-rows-home-rows gap-[20px] mb-[40px] ">
+        <ul className="grid grid-cols-home-columns grid-rows-home-rows gap-[20px] mb-[40px]">
           {catsData.map((item, idx) => {
             return (
               <li
@@ -39,7 +43,13 @@ export const CatsGrid: FC<IProps> = ({
                   idx === 12 && "col-start-1 row-start-7 row-end-9"
                 } ${
                   idx === 13 && "col-start-2 col-end-4 row-start-8 row-end-10"
-                } ${idx === 14 && "col-start-1 row-start-9"}`}
+                } ${idx === 14 && "col-start-1 row-start-9"} 
+                 
+                ${idx === 15 && "col-start-1 row-start-10"} ${
+                  idx === 16 && "col-start-2 row-start-10"
+                } ${idx === 17 && "col-start-3 row-start-10 row-end-12"} ${
+                  idx === 18 && "col-start-1 col-end-3 row-start-11 row-end-13"
+                } ${idx === 19 && "col-start-3 row-start-12"}`}
                 key={item.id}
               >
                 <Image
@@ -51,14 +61,25 @@ export const CatsGrid: FC<IProps> = ({
                 />
 
                 {isDelBtnNeed && (
-                  <div className="absolute top-0 left-0 w-full h-full bg-[--img-hover] rounded-[20px] flex items-center justify-center opacity-0  hover:opacity-100">
-                    <button
-                      id={item.id.toString()}
-                      onClick={onClick}
-                      className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus"
-                    >
-                      <FavoriteFill />
-                    </button>
+                  <div className="absolute top-0 left-0 w-full h-full bg-[--img-hover] rounded-[20px] flex items-center justify-center opacity-0  hover:opacity-100 p-[10px]">
+                    {pathname === "/favorites" && (
+                      <button
+                        id={item.id.toString()}
+                        onClick={onClick}
+                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                      >
+                        <FavoriteFill />
+                      </button>
+                    )}
+                    {pathname === "/breeds" && (
+                      <Link
+                        id={item.id.toString()}
+                        href={`/breeds/${item.breeds?.id}`}
+                        className="fill-current text-center text-[16px] text-[#FF868E] bg-[#FFFFFF] w-full py-[5px] rounded-[10px] focus:text-[#FFFFFF] self-end hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                      >
+                        {item.breeds?.name}
+                      </Link>
+                    )}
                   </div>
                 )}
               </li>

@@ -102,7 +102,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
         <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
           <BackBtn title="Voting" />
           <div className="relative mb-[52px]">
-            <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden items-center ">
+            <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden">
               <Image
                 className="rounded-[20px] object-center  object-cover w-full h-full"
                 id={catsData[0].id}

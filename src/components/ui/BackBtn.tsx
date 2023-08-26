@@ -3,9 +3,15 @@ import { useRouter } from "next/router";
 
 interface IProps {
   title: string;
+  color?: string;
+  bgColor?: string;
 }
 
-export const BackBtn = ({ title }: IProps) => {
+export const BackBtn = ({
+  title,
+  color = "#FFFFFF",
+  bgColor = "#FF868E",
+}: IProps) => {
   const router = useRouter();
 
   const onBtnClick = () => {
@@ -21,8 +27,10 @@ export const BackBtn = ({ title }: IProps) => {
       >
         <ArrowLeft width="20" height="20" />
       </button>
-      <div className="py-[5px] px-[30px] rounded-[10px] bg-[#FF868E]">
-        <h2 className="uppercase text-[#FFFFFF] font-medium">{title}</h2>
+      <div className={`py-[5px] px-[30px] rounded-[10px] bg-[${bgColor}]`}>
+        <h2 className={`uppercase text-[${color}] font-medium tracking-[2px]`}>
+          {title}
+        </h2>
       </div>
     </div>
   );

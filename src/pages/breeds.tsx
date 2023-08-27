@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const BreedsPage: FC<IProps> = ({ breedsList, searchBreeds }) => {
   return (
     <Breeds
-      breedsList={[{ value: "", label: "All breeds" }, ...breedsList]}
+      breedsList={[{ value: "all breeds", label: "All breeds" }, ...breedsList]}
       searchBreeds={searchBreeds}
     />
   );

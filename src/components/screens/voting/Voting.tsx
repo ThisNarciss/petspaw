@@ -115,6 +115,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
               <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[#FFFFFF] border-solid bg-[#FFFFFF] rounded-[20px]">
                 <li>
                   <button
+                    type="button"
                     onClick={onBtnClickUpVote}
                     className="p-[25px] bg-[#97EAB9] text-[#FFFFFF] rounded-l-[20px] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
                   >
@@ -123,6 +124,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                 </li>
                 <li>
                   <button
+                    type="button"
                     onClick={onBtnClickToFavorite}
                     className={`p-[25px] bg-[#FF868E] text-[#FFFFFF] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
                   >
@@ -131,6 +133,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                 </li>
                 <li>
                   <button
+                    type="button"
                     onClick={onBtnClickDownVote}
                     className="p-[25px] bg-[#FFD280] text-[#FFFFFF] fill-current rounded-r-[20px] hover:bg-[#ffd3805a] hover:text-[#FFD280]"
                   >

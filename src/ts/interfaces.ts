@@ -5,4 +5,5 @@ export interface ICat {
   user_id?: string;
   image_id?: string;
   breeds?: { name: string; id: string };
+  original_filename?: string;
 }

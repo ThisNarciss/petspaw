@@ -17,6 +17,26 @@ export const CatServices = {
       return error.message;
     }
   },
+  getGalleryCat: async (...rest: any) => {
+    try {
+      const response = await axios.get(
+        `/images/search?limit=${rest[0].limit}&order=${rest[0].order}&breed_ids=${rest[0].breed}&mime_types=${rest[0].type}`
+      );
+      const data = response.data;
+
+      const newData = data.map(
+        (item: { url: string; id: string; breeds?: any[] }) => ({
+          image: { url: item.url },
+          id: item.id,
+          breeds: item.breeds,
+        })
+      );
+
+      return newData;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
   getFavorite: async (limit: string = "") => {
     try {
       const response = await axios.get(`/favourites${limit}`);
@@ -44,6 +64,24 @@ export const CatServices = {
       const data = res.data;
 
       return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+  getUpload: async (limit = "15") => {
+    try {
+      const res = await axios.get(`/images/?limit=${limit}`);
+      const data = res.data;
+
+      const newData = data.map(
+        (item: { url: string; id: string; breeds?: any[] }) => ({
+          image: { url: item.url },
+          id: item.id,
+          breeds: item.breeds,
+        })
+      );
+
+      return newData;
     } catch (error: any) {
       return error.message;
     }
@@ -137,6 +175,22 @@ export const CatServices = {
       return error.message;
     }
   },
+
+  uploadImage: async (image: FormData) => {
+    try {
+      const response = await axios.post("/images/upload", image, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error.message;
+    }
+  },
+
   delFromFavorite: async (image_id: number) => {
     try {
       const response = await axios.delete(`/favourites/${image_id}`);

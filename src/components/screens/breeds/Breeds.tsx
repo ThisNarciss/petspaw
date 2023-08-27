@@ -5,12 +5,11 @@ import { IProps } from "@/pages/breeds";
 import { CatServices } from "@/services/CatServices";
 import { SortDown } from "@/svg/SortDown";
 import { SortUp } from "@/svg/SortUp";
-import { ICat } from "@/ts/interfaces";
 import { styledSelect } from "@/utils/styledSelect";
 
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
+import Select, { MultiValue, SingleValue } from "react-select";
 
 interface IOption {
   readonly value: string;
@@ -26,12 +25,10 @@ const options = [
 
 export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const [findBreeds, setFindBreeds] = useState(searchBreeds);
-  const [breed, setBreed] = useState("");
+  const [breed, setBreed] = useState("all breeds");
 
-  const { register } = useForm();
-
-  const selectBreedsStyles = styledSelect("226px");
-  const selectLimitStyles = styledSelect("101px");
+  const selectBreedsStyles = styledSelect({ width: "226px" });
+  const selectLimitStyles = styledSelect({ width: "101px" });
 
   const onSortedBtnUpClick = () => {
     const sortedBreeds = [...findBreeds].sort((a, b) => {
@@ -51,13 +48,12 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   };
 
   const onBreedsChange = async (
-    newValue:
-      | MultiValue<{ value: string; label: string }>
-      | SingleValue<{ value: string; label: string }>
+    newValue: MultiValue<IOption> | SingleValue<IOption>
   ) => {
     if (newValue !== null) {
       if ("label" in newValue) {
         const { label } = newValue;
+
         const selectedBreed = await CatServices.searchBreeds(label);
         setFindBreeds(selectedBreed);
         setBreed(label);
@@ -65,13 +61,12 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
     }
   };
   const onLimitsChange = async (
-    newValue:
-      | MultiValue<{ value: string; label: string }>
-      | SingleValue<{ value: string; label: string }>
+    newValue: MultiValue<IOption> | SingleValue<IOption>
   ) => {
     if (newValue !== null) {
       if ("value" in newValue) {
         const { value } = newValue;
+
         const selectedBreed = await CatServices.searchBreeds(breed, value);
         setFindBreeds(selectedBreed);
       }
@@ -97,12 +92,14 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
               onChange={onLimitsChange}
             />
             <button
+              type="button"
               onClick={onSortedBtnUpClick}
               className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
             >
               <SortUp />
             </button>
             <button
+              type="button"
               onClick={onSortedBtnDownClick}
               className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
             >

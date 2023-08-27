@@ -33,7 +33,10 @@ const config: Config = {
         "home-columns": "200px 200px 200px",
       },
       gridTemplateRows: {
-        "home-rows":
+        threeRows: "140px 140px 140px",
+        sixRows: "140px 140px 140px 140px 140px 140px",
+        nineRows: "140px 140px 140px 140px 140px 140px 140px 140px 140px",
+        twelveRows:
           "140px 140px 140px 140px 140px 140px 140px 140px 140px 140px 140px 140px",
       },
       backgroundImage: {

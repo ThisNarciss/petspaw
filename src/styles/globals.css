@@ -8,6 +8,7 @@
   --background-color: #f8f8f7;
   --border-purple: rgba(255, 255, 255, 0.6);
   --img-hover: rgba(255, 134, 142, 0.6);
+  --backdrop: rgba(29, 29, 29, 0.6);
 }
 
 @media (prefers-color-scheme: white) {
@@ -29,4 +30,9 @@ body {
 button {
   padding: 0;
   cursor: pointer;
+  transition: all 250ms linear;
+}
+
+a {
+  transition: all 250ms linear;
 }

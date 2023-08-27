@@ -26,33 +26,25 @@ export const Cat: FC = () => {
   const [cat, setCat] = useState<ICatInfo[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + cat.length) % cat.length);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % cat.length);
-  };
+  const {
+    query: { id },
+  } = useRouter();
 
   const onBtnSlideClick = (e: MouseEvent<HTMLButtonElement>) => {
     const id = Number(e.currentTarget.id);
     setCurrentSlide(Number(id));
   };
 
-  const {
-    query: { id },
-  } = useRouter();
-
   useEffect(() => {
+    if (!id) {
+      return;
+    }
     (async () => {
       const breed = await CatServices.getBreedsById(id);
+
       setCat(breed);
     })();
   }, [id]);
-
-  if (!cat?.length) {
-    return;
-  }
 
   return (
     <CollectionNav>
@@ -66,7 +58,7 @@ export const Cat: FC = () => {
               </h2>
             </div>
           </div>
-          {Boolean(cat?.length) && (
+          {Boolean(cat.length) && (
             <div>
               <div className="w-[640px] flex  justify-center h-[360px] mb-[50px] relative">
                 <div className="flex">
@@ -94,6 +86,7 @@ export const Cat: FC = () => {
                   {btnInx.map((item, idx) => {
                     return (
                       <button
+                        type="button"
                         key={item}
                         id={item.toString()}
                         onClick={onBtnSlideClick}
@@ -113,7 +106,7 @@ export const Cat: FC = () => {
                 <p className="text-center font-medium mb-[20px]">
                   {cat[0].breeds[0].description}
                 </p>
-                <div className="flex items-start">
+                <div className="flex items-start gap-[20px]">
                   <p className="max-w-[50%] text-[16px] ">
                     <span className="font-medium text-[#1D1D1D]">
                       Temperament:

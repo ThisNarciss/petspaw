@@ -4,18 +4,29 @@ interface IOption {
   readonly value: string;
   readonly label: string;
 }
+interface IParams {
+  width?: string;
+  color?: string;
+  bgColor?: string;
+  borderColor?: string;
+}
 
-export function styledSelect(width: string) {
+export function styledSelect({
+  width,
+  bgColor = "#F8F8F7",
+  color = "#8C8C8C",
+  borderColor = "#F8F8F7",
+}: IParams) {
   const colorStyles: StylesConfig<IOption> = {
     control: (styles) => ({
       ...styles,
-      padding: "3px 8px",
-      backgroundColor: "#F8F8F7",
+      padding: "4px 8px",
+      backgroundColor: bgColor,
       width,
-      color: "#8C8C8C",
+      color,
       borderRadius: "10px",
       borderWidth: "2px",
-      borderColor: "#F8F8F7",
+      borderColor: borderColor,
       borderStyle: "solid",
       ":hover": {
         ...styles[":hover"],
@@ -30,6 +41,8 @@ export function styledSelect(width: string) {
         color: "#8C8C8C",
         border: "none",
         borderRadius: "30px",
+        fontSize: "16px",
+        textTransform: "none",
       };
     },
     menu: (styles) => {
@@ -39,6 +52,7 @@ export function styledSelect(width: string) {
         color: "#8C8C8C",
         border: "none",
         borderRadius: "30px",
+        padding: "8px",
       };
     },
     input: (styles) => ({
@@ -46,15 +60,16 @@ export function styledSelect(width: string) {
       padding: "0",
       margin: "0",
       border: "none",
-      color: "#8C8C8C",
+      color,
     }),
     singleValue: (styles) => ({
       ...styles,
       border: "none",
-      color: "#8C8C8C",
+      color,
       fontSize: "16px",
       lineHeight: "1.5",
       margin: "0",
+      textTransform: "none",
     }),
     placeholder: (styles) => ({ ...styles }),
     valueContainer: (styles) => ({ ...styles, padding: "0" }),

@@ -24,11 +24,11 @@ export const Search: FC = () => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px] flex flex-col gap-[20px]">
           <BackBtn title="Search" />
           <p>
             Search results for:{" "}
-            <span className="text-[#1D1D1D] font-medium">
+            <span className="text-[--foreground-second-color] font-medium">
               {searchBreeds[0]?.breeds?.name}
             </span>
           </p>

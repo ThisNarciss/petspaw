@@ -7,7 +7,7 @@ import { SortDown } from "@/svg/SortDown";
 import { SortUp } from "@/svg/SortUp";
 import { styledSelect } from "@/utils/styledSelect";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select, { MultiValue, SingleValue } from "react-select";
 
@@ -27,7 +27,9 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const [findBreeds, setFindBreeds] = useState(searchBreeds);
   const [breed, setBreed] = useState("all breeds");
 
-  const selectBreedsStyles = styledSelect({ width: "226px" });
+  const selectBreedsStyles = styledSelect({
+    width: "226px",
+  });
   const selectLimitStyles = styledSelect({ width: "101px" });
 
   const onSortedBtnUpClick = () => {
@@ -76,15 +78,18 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   return (
     <CollectionNav>
       <section className="flex flex-col gap-[10px] ">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px]">
+        <div className="p-[20px] bg-[--background-second-color] rounded-[20px] dark:bg-[--dark-mode-bg]">
           <div className="flex items-center mb-[20px] gap-[10px]">
             <BackBtn title="Breeds" />
+
             <Select
+              className=""
               defaultValue={breedsList[0]}
               options={breedsList}
               styles={selectBreedsStyles}
               onChange={onBreedsChange}
             />
+
             <Select
               defaultValue={options[2]}
               options={options}
@@ -94,23 +99,19 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
             <button
               type="button"
               onClick={onSortedBtnUpClick}
-              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
+              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] dark:bg-[--dark-mode-drop-bg] hover:border-[#FBE0DC] dark:border-[--dark-mode-drop-bg] dark:hover:border-[--dark-mode-second-bg]"
             >
               <SortUp />
             </button>
             <button
               type="button"
               onClick={onSortedBtnDownClick}
-              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] hover:border-[#FBE0DC]"
+              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] dark:bg-[--dark-mode-drop-bg] hover:border-[#FBE0DC] dark:border-[--dark-mode-drop-bg] dark:hover:border-[--dark-mode-second-bg]"
             >
               <SortDown />
             </button>
           </div>
-          <CatsGrid
-            catsData={findBreeds}
-            // onClick={onBtnFavClick}
-            isDelBtnNeed
-          />
+          <CatsGrid catsData={findBreeds} isDelBtnNeed />
         </div>
       </section>
     </CollectionNav>

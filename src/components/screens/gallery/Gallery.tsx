@@ -13,7 +13,6 @@ import { CatServices } from "@/services/CatServices";
 import { LogItem } from "@/components/log-item/LogItem";
 import { DateService } from "@/services/DateService";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { log } from "console";
 
 interface IProps {
   breedsList: { value: string; label: string }[];
@@ -155,7 +154,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   return (
     <CollectionNav>
       <section className="flex flex-col gap-[10px] w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px]">
+        <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px]">
           {isModalOpen && (
             <Portal>
               <Modal
@@ -173,7 +172,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
             <button
               onClick={openModal}
               type="button"
-              className="px-[30px] flex items-center gap-[10px] py-[12px] bg-[#FBE0DC] rounded-[10px] uppercase text-[#FF868E] fill-current text-[12px] font-medium leading-4 tracking-[2px] hover:text-[#FFFFFF] hover:bg-[#FF868E]"
+              className="px-[30px] flex items-center gap-[10px] py-[12px] bg-[#FBE0DC] rounded-[10px] uppercase text-[#FF868E] fill-current dark:hover:text-[#FFFFFF] dark:bg-[--dark-mode-second-bg] dark:hover:bg-[#FF868E] text-[12px] font-medium leading-4 tracking-[2px] hover:text-[--background-second-color] hover:bg-[#FF868E]"
             >
               <Upload />
               Upload
@@ -181,7 +180,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex items-center flex-wrap max-w-[640px] rounded-[20px] bg-[#F8F8F7] p-[20px] gap-[20px] mb-[20px]"
+            className="flex items-center flex-wrap max-w-[640px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[20px] gap-[20px] mb-[20px]"
           >
             <label className="text-[10px] uppercase">
               <span className="ml-[10px] leading-[1.8]">Order</span>
@@ -226,7 +225,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
                 />
               </label>
 
-              <button className="fill-current bg-[#FFFFFF] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] focus:text-[#FFFFFF] focus:bg-[#FF868E]">
+              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E]">
                 <Reload />
               </button>
             </div>

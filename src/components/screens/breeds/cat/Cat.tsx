@@ -49,11 +49,15 @@ export const Cat: FC = () => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px] flex flex-col gap-[20px]">
           <div className="flex items-center gap-[10px]">
-            <BackBtn title="Breeds" bgColor="#FBE0DC" color="#FF868E" />
+            <BackBtn
+              title="Breeds"
+              bgColor="bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
+              color="#FF868E"
+            />
             <div className="py-[5px] px-[30px] rounded-[10px] bg-[#FF868E]">
-              <h2 className="uppercase text-[#FFFFFF] font-medium tracking-[2px]">
+              <h2 className="uppercase text-[--background-second-color] font-medium tracking-[2px]">
                 id
               </h2>
             </div>
@@ -82,7 +86,7 @@ export const Cat: FC = () => {
                     );
                   })}
                 </div>
-                <div className="p-[10px] bottom-[-15px] absolute flex items-start gap-[5px] z-10 rounded-[20px] bg-[#FFFFFF]">
+                <div className="p-[10px] bottom-[-15px] absolute flex items-start gap-[5px] z-10 rounded-[20px] bg-[--background-second-color] dark:bg-[#282828]">
                   {btnInx.map((item, idx) => {
                     return (
                       <button
@@ -91,7 +95,9 @@ export const Cat: FC = () => {
                         id={item.toString()}
                         onClick={onBtnSlideClick}
                         className={`w-[10px] h-[10px] rounded-[10px] ${
-                          idx === currentSlide ? "bg-[#FF868E]" : "bg-[#FBE0DC]"
+                          idx === currentSlide
+                            ? "bg-[#FF868E]"
+                            : "bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
                         } `}
                       ></button>
                     );
@@ -99,8 +105,8 @@ export const Cat: FC = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center border-[2px] border-solid rounded-[20px] border-[#FBE0DC] px-[40px] py-[30px] relative">
-                <h2 className="absolute top-[-30px] bg-[#FFFFFF] px-[40px] py-[5px] rounder-[20px] text-[#1D1D1D] text-[36px] font-medium">
+              <div className="flex flex-col items-center justify-center border-[2px] border-solid rounded-[20px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] px-[40px] py-[30px] relative">
+                <h2 className="absolute top-[-30px] bg-[--background-second-color] dark:bg-[#282828] px-[40px] py-[5px] rounded-[20px] text-[--foreground-second-color] dark:text-[#FFFFFF] text-[36px] font-medium">
                   {cat[0].breeds[0].name}
                 </h2>
                 <p className="text-center font-medium mb-[20px]">
@@ -108,29 +114,29 @@ export const Cat: FC = () => {
                 </p>
                 <div className="flex items-start gap-[20px]">
                   <p className="max-w-[50%] text-[16px] ">
-                    <span className="font-medium text-[#1D1D1D]">
+                    <span className="font-medium text-[--foreground-second-color] dark:text-[#FFFFFF]">
                       Temperament:
                     </span>{" "}
                     {cat[0].breeds[0].temperament}
                   </p>
                   <div>
-                    <p className="text-[16px] ">
-                      <span className=" font-medium text-[#1D1D1D]">
+                    <p className="text-[16px] mb-[10px]">
+                      <span className=" font-medium text-[--foreground-second-color] dark:text-[#FFFFFF]">
                         Origin:
                       </span>{" "}
                       {cat[0].breeds[0].origin}
                     </p>
-                    <p className="text-[16px] ">
-                      <span className=" font-medium text-[#1D1D1D]">
+                    <p className="text-[16px] mb-[10px]">
+                      <span className=" font-medium text-[--foreground-second-color] dark:text-[#FFFFFF]">
                         Weight:
                       </span>{" "}
-                      {cat[0].breeds[0].weight.metric}
+                      {cat[0].breeds[0].weight.metric} kgs
                     </p>
                     <p className="text-[16px] ">
-                      <span className=" font-medium text-[#1D1D1D]">
+                      <span className=" font-medium text-[--foreground-second-color] dark:text-[#FFFFFF]">
                         Life span:
                       </span>{" "}
-                      {cat[0].breeds[0].life_span}
+                      {cat[0].breeds[0].life_span} years
                     </p>
                   </div>
                 </div>

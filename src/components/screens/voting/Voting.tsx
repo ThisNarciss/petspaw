@@ -99,7 +99,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px] flex flex-col gap-[20px]">
           <BackBtn title="Voting" />
           <div className="relative mb-[52px]">
             <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden">
@@ -112,12 +112,12 @@ export const Voting: FC<IProps> = ({ cats }) => {
                 width={640}
                 height={360}
               />
-              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[#FFFFFF] border-solid bg-[#FFFFFF] rounded-[20px]">
+              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[--background-second-color] border-solid bg-[--background-second-color] rounded-[20px]">
                 <li>
                   <button
                     type="button"
                     onClick={onBtnClickUpVote}
-                    className="p-[25px] bg-[#97EAB9] text-[#FFFFFF] rounded-l-[20px] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
+                    className="p-[25px] bg-[#97EAB9] text-[--background-second-color] rounded-l-[20px] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
                   >
                     <Like />
                   </button>
@@ -126,7 +126,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickToFavorite}
-                    className={`p-[25px] bg-[#FF868E] text-[#FFFFFF] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
+                    className={`p-[25px] bg-[#FF868E] text-[--background-second-color] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
                   >
                     {isFavorite ? <FavoriteFill /> : <Favorite />}
                   </button>
@@ -135,7 +135,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickDownVote}
-                    className="p-[25px] bg-[#FFD280] text-[#FFFFFF] fill-current rounded-r-[20px] hover:bg-[#ffd3805a] hover:text-[#FFD280]"
+                    className="p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current rounded-r-[20px] hover:bg-[#ffd3805a] hover:text-[#FFD280]"
                   >
                     <Dislike />
                   </button>

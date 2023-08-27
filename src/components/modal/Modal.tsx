@@ -3,6 +3,11 @@ import ImageUploader from "../uploader/ImageUploader";
 import { CatServices } from "@/services/CatServices";
 import { LogItem } from "../log-item/LogItem";
 
+import { Jost } from "next/font/google";
+import { Cross } from "@/svg/Cross";
+
+const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
+
 interface IProps {
   closeModal: () => void;
   sendData: { order: string; type: string; breed: string };
@@ -46,12 +51,17 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
   };
 
   return (
-    <div className="fixed flex items-center justify-end top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop]">
-      <div className="relative h-full w-[680px] px-[20px] text-center bg-[#F8F8F7] rounded-[20px] py-[100px]">
-        <button className="absolute top-6 right-6" onClick={closeModal}>
-          close
+    <div
+      className={`fixed flex items-center justify-end top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop] ${jost.className}`}
+    >
+      <div className="relative h-full w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px]">
+        <button
+          className="absolute p-[11px] text-[#FF868E] top-6 right-6 fill-current bg-[#FFFFFF] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E]"
+          onClick={closeModal}
+        >
+          <Cross />
         </button>
-        <h2 className="text-center text-[36px] text-[#1D1D1D] font-medium mb-[10px]">
+        <h2 className="text-center text-[36px] text-[--foreground-second-color] font-medium mb-[10px] dark:text-[#FFFFFF]">
           Upload a .jpg or .png Cat Image
         </h2>
         <p className="mb-[40px]">
@@ -71,7 +81,7 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
           {url && (
             <div>
               <p className="mb-[20px]">Image File Name: {name}</p>
-              <button className="uppercase bg-[#FF868E] text-[#FFFFFF] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
+              <button className="uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
                 Upload Photo
               </button>
             </div>

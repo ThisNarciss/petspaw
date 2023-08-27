@@ -39,9 +39,11 @@ export const SearchForm = () => {
 
   return (
     <form
-      className={`flex items-center justify-between gap-[10px] rounded-[20px] w-[470px] py-[10px] px-[20px] bg-[#ffffff] border-[2px] border-solid hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
-        isFocused ? "border-[#FF868E]" : "border-[#FFFFFF]"
-      }`}
+      className={`flex items-center justify-between gap-[10px] rounded-[20px] w-[470px] py-[10px] px-[20px] bg-[--background-second-color]  border-[2px] border-solid hover:border-[#FBE0DC] dark:hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
+        isFocused
+          ? "border-[#FF868E]"
+          : "border-[--background-second-color] dark:border-[--dark-mode-darkest-bg]"
+      } dark:bg-[--dark-mode-bg]`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="relative w-full">
@@ -49,7 +51,7 @@ export const SearchForm = () => {
           onFocus={handleFocus}
           onChange={onChange}
           onBlur={handleBlur}
-          className="placeholder:text-[#8C8C8C] w-full outline-none"
+          className="placeholder:text-[--foreground-color] w-full outline-none dark:bg-[--dark-mode-darkest-bg]"
           placeholder="Search for breeds by name"
           defaultValue={watch("search")}
           name={name}
@@ -62,7 +64,7 @@ export const SearchForm = () => {
         )}
       </div>
 
-      <button className="p-[10px] bg-[#FBE0DC] rounded-[10px] text-[#FF868E] fill-current hover:text-[#FFFFFF] hover:bg-[#FF868E]">
+      <button className="p-[10px] bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg] rounded-[10px] text-[#FF868E] fill-current hover:text-[--background-second-color] hover:bg-[#FF868E] dark:hover:bg-[#FF868E]">
         <Search />
       </button>
     </form>

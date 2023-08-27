@@ -1,7 +1,6 @@
 import { Favorite } from "@/svg/Favorite";
 import { FavoriteFill } from "@/svg/FavoriteFill";
 import { ICat } from "@/ts/interfaces";
-import { imgGridStyles } from "@/utils/imgGridStyles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,7 +17,7 @@ export const CatsGrid: FC<IProps> = ({
   onClick,
   isDelBtnNeed = false,
 }) => {
-  const { pathname, push } = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <>
@@ -45,10 +44,89 @@ export const CatsGrid: FC<IProps> = ({
           {catsData.map((item, idx) => {
             return (
               <li
-                className={`relative rounded-[20px] overflow-hidden ${imgGridStyles(
-                  catsData.length,
-                  idx
-                )}`}
+                className={`relative rounded-[20px] overflow-hidden ${
+                  catsData.length > 0 && idx === 0
+                    ? "col-start-1 row-start-1 row-end-3"
+                    : ""
+                } ${
+                  catsData.length > 1 && idx === 1
+                    ? "col-start-2 row-start-1"
+                    : ""
+                } ${
+                  catsData.length > 2 && idx === 2
+                    ? "col-start-3 row-start-1"
+                    : ""
+                } ${
+                  catsData.length > 3 && idx === 3
+                    ? "col-start-2 col-end-4 row-start-2 row-end-4"
+                    : ""
+                } ${
+                  catsData.length > 4 && idx === 4
+                    ? "col-start-1 row-start-3"
+                    : ""
+                } ${
+                  catsData.length > 5 && idx === 5
+                    ? "col-start-1 row-start-4 row-end-4"
+                    : ""
+                } ${
+                  catsData.length > 6 && idx === 6
+                    ? "col-start-2 row-start-4 row-end-4"
+                    : ""
+                } ${
+                  catsData.length > 7 && idx === 7
+                    ? "col-start-3 row-start-4 row-end-6"
+                    : ""
+                } ${
+                  catsData.length > 8 && idx === 8
+                    ? "col-start-1 col-end-3 row-start-5 row-end-7"
+                    : ""
+                } ${
+                  catsData.length > 9 && idx === 9
+                    ? "col-start-3 row-start-6 "
+                    : ""
+                } ${
+                  catsData.length > 10 && idx === 10
+                    ? "col-start-3 row-start-7 "
+                    : ""
+                } ${
+                  catsData.length > 11 && idx === 11
+                    ? "col-start-2 row-start-7"
+                    : ""
+                } ${
+                  catsData.length > 12 && idx === 12
+                    ? "col-start-1 row-start-7 row-end-9"
+                    : ""
+                } ${
+                  catsData.length > 13 && idx === 13
+                    ? "col-start-2 col-end-4 row-start-8 row-end-10"
+                    : ""
+                } ${
+                  catsData.length > 14 && idx === 14
+                    ? "col-start-1 row-start-9"
+                    : ""
+                } 
+                 
+                ${
+                  catsData.length > 15 && idx === 15
+                    ? "col-start-1 row-start-10"
+                    : ""
+                } ${
+                  catsData.length > 16 && idx === 16
+                    ? "col-start-2 row-start-10"
+                    : ""
+                } ${
+                  catsData.length > 17 && idx === 17
+                    ? "col-start-3 row-start-10 row-end-12"
+                    : ""
+                } ${
+                  catsData.length > 18 && idx === 18
+                    ? "col-start-1 col-end-3 row-start-11 row-end-13"
+                    : ""
+                } ${
+                  catsData.length > 19 && idx === 19
+                    ? "col-start-3 row-start-12"
+                    : ""
+                }`}
                 key={item.id}
               >
                 <Image
@@ -66,7 +144,7 @@ export const CatsGrid: FC<IProps> = ({
                         type="button"
                         id={item.id.toString()}
                         onClick={onClick}
-                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] dark:bg-[#282828] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] dark:hover:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
                       >
                         <FavoriteFill />
                       </button>
@@ -75,7 +153,7 @@ export const CatsGrid: FC<IProps> = ({
                       <Link
                         id={item.id.toString()}
                         href={`/breeds/${item.breeds?.id}`}
-                        className="fill-current text-center text-[16px] text-[#FF868E] bg-[#FFFFFF] w-full py-[5px] rounded-[10px] focus:text-[#FFFFFF] self-end hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                        className="fill-current text-center text-[16px] text-[#FF868E] bg-[#FFFFFF] w-full py-[5px] rounded-[10px] focus:text-[#FFFFFF] self-end hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF] dark:bg-[#282828] dark:hover:bg-[#FF868E]"
                       >
                         {item.breeds?.name}
                       </Link>
@@ -86,7 +164,7 @@ export const CatsGrid: FC<IProps> = ({
                         type="button"
                         id={item.id.toString()}
                         onClick={onClick}
-                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF] dark:bg-[#282828] dark:hover:bg-[#FF868E]"
                       >
                         {<Favorite />}
                       </button>

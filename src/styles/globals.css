@@ -2,13 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --foreground-color: #8c8c8c;
   --foreground-second-color: #1d1d1d;
+  --foreground-text-color: #ffffff;
   --background-color: #f8f8f7;
+  --background-second-color: #ffffff;
   --border-purple: rgba(255, 255, 255, 0.6);
   --img-hover: rgba(255, 134, 142, 0.6);
   --backdrop: rgba(29, 29, 29, 0.6);
+  --dark-mode-bg: rgba(255, 255, 255, 0.1);
+  --dark-mode-second-bg: rgba(255, 134, 142, 0.2);
+  --dark-mode-black-color: rgba(40, 40, 40, 1);
+  --dark-mode-drop-bg: rgba(255, 255, 255, 0.05);
+  --dark-mode-darkest-bg: rgba(255, 255, 255, 0);
 }
 
 @media (prefers-color-scheme: white) {
@@ -16,6 +25,7 @@
     --foreground-rgb: #8c8c8c;
     --foreground-second-color: #ffffff;
     --background-color: #1d1d1d;
+    --background-second-color: rgba(255, 255, 255, 0.1);
   }
 }
 

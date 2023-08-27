@@ -52,7 +52,7 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px] flex flex-col gap-[20px]">
           <BackBtn title="Favorites" />
           <CatsGrid catsData={fav} onClick={onBtnFavClick} isDelBtnNeed />
 

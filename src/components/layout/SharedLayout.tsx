@@ -1,10 +1,11 @@
 import { Jost } from "next/font/google";
 import { Logo } from "@/svg/Logo";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import Head from "next/head";
 import { Navigation } from "@/components/ui/Navigation";
 import { NAV_LINKS } from "@/utils/constants";
 import Link from "next/link";
+import { MaterialUISwitch } from "./Swich.styled";
 
 const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -13,27 +14,44 @@ interface IProps {
 }
 
 export const SharedLayout: FC<IProps> = ({ children }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  const onBtnClick = () => {
+    if (!isDark) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    }
+  };
+
   return (
     <>
       <Head>
         <title>Pets Paw</title>
       </Head>
       <div
-        className={`lg:container md:container sm:container px-[30px] mx-auto ${jost.className}`}
+        className={`lg:container md:container sm:container px-[30px] mx-auto ${jost.className} dark:bg-[--foreground-second-color]`}
       >
         <main className="flex relative  items-start py-[30px] ">
-          <section className="sticky top-[30px] pl-[117px] pr-[137px] h-[auto]">
-            <div className="mb-[80px]">
-              <Link href="/">
+          <section className="sticky top-[30px] pl-[117px] pr-[137px] h-[auto] dark:bg-[--foreground-second-color]">
+            <div className="mb-[80px] flex items-center justify-between">
+              <Link
+                className="fill-current text-[--foreground-second-color] dark:text-[#FFFFFF]"
+                href="/"
+              >
                 <Logo />
               </Link>
+              <MaterialUISwitch onClick={onBtnClick} />
             </div>
-            <h1 className="text-[var(--foreground-second-color)] text-[44px] leading-[1.32] font-medium mb-[10px]">
+
+            <h1 className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] text-[44px] leading-[1.32] font-medium mb-[10px]">
               Hi!👋
             </h1>
             <p className="mb-[60px]">Welcome to MacPaw Bootcamp 2023</p>
             <div>
-              <h2 className="text-[var(--foreground-second-color)] font-medium mb-[20px]">
+              <h2 className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] font-medium mb-[20px]">
                 Lets start using The Cat API
               </h2>
               <nav>

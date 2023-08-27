@@ -22,8 +22,9 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
       {navLinks.map((link, idx) => {
         const isActive = pathname === link.href;
 
-        let active = "text-[#FFFFFF] bg-[#FF868E]";
-        let inActive = "text-[#FF868E] bg-[#FFFFFF]";
+        let active = "text-[--foreground-text-color] bg-[#FF868E]";
+        let inActive =
+          "text-[#FF868E] bg-[--background-second-color] dark:bg-[--dark-mode-bg]";
         let bgColor = "";
         switch (idx) {
           case 0:
@@ -55,7 +56,7 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
               href={link.href}
             >
               <div
-                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] group-hover:border-[#FFFFFF] h-[198px] ${bgColor} ${
+                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] group-hover:border-[--background-second-color] h-[198px] ${bgColor} ${
                   isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
                 }`}
               >
@@ -68,13 +69,13 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
                   loading="lazy"
                 />
               </div>
-              <span
-                className={`py-[10px] w-[138px] rounded-[10px] text-[12px] font-medium leading-[1.33] text-center group-hover:bg-[#FBE0DC] hover:text-[#FF868E] ${
+              <p
+                className={`py-[10px] w-[138px] rounded-[10px] text-[12px] font-medium leading-[1.33] text-center  group-hover:bg-[#FBE0DC] hover:text-[#FF868E] ${
                   isActive ? active : inActive
                 }`}
               >
                 {link.name}
-              </span>
+              </p>
             </Link>
           </li>
         );

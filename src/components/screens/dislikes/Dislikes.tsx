@@ -12,7 +12,7 @@ export const Dislikes: FC<IProps> = ({ dislikedCats }) => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[#FFFFFF] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="dark:bg-[--dark-mode-bg] p-[20px] bg-[--background-second-color] rounded-[20px] flex flex-col gap-[20px]">
           <BackBtn title="Dislikes" />
           <CatsGrid catsData={dislikedCats} />
         </div>

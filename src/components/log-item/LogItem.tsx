@@ -15,12 +15,15 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
   return typeof text !== "number" ? (
     <li className="flex items-center justify-between px-[25px] py-[18px] bg-[#F8F8F7] rounded-[10px]">
       <div className="flex items-center gap-[30px]">
-        <p className="px-[10px] py-[3px] text-[#1D1D1D] text-[16px] leading-6 bg-[#FFFFFF] rounded-[5px]">
+        <p className="px-[10px] py-[3px] text-[--foreground-second-color] text-[16px] leading-6 bg-[--background-second-color] rounded-[5px]">
           {time}
         </p>
         <p className="text-[16px] leading-6">
-          Image ID: <span className="text-[#1D1D1D] font-medium">{id}</span> was{" "}
-          {text}
+          Image ID:{" "}
+          <span className="text-[--foreground-second-color] font-medium">
+            {id}
+          </span>{" "}
+          was {text}
         </p>
       </div>
       {text === "added to Dislikes" && (
@@ -40,7 +43,7 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
       )}
     </li>
   ) : (
-    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[#FFFFFF] rounded-[10px]">
+    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[--background-second-color] rounded-[10px]">
       {text === 1 && (
         <>
           <div className="flex items-center gap-[10px]">

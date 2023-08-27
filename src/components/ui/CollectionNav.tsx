@@ -23,10 +23,10 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
           return (
             <Link
               key={link.href}
-              className={`p-[15px] rounded-[20px]  hover:bg-[#FBE0DC] fill-current  ${
+              className={`p-[15px] rounded-[20px]  hover:bg-[#FBE0DC] fill-current  dark:hover:bg-[#FBE0DC] ${
                 isActive
-                  ? "bg-[#FF868E] text-[#FFFFFF]"
-                  : "bg-[#FFFFFF] text-[#FF868E]"
+                  ? "bg-[#FF868E] text-[--background-second-color]"
+                  : "bg-[--background-second-color] text-[#FF868E] dark:bg-[--dark-mode-second-bg]"
               }`}
               href={link.href}
             >

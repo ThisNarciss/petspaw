@@ -39,7 +39,7 @@ export const SearchForm = () => {
 
   return (
     <form
-      className={`flex items-center justify-between gap-[10px] rounded-[20px] w-[470px] py-[10px] px-[20px] bg-[--background-second-color]  border-[2px] border-solid hover:border-[#FBE0DC] dark:hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
+      className={`flex items-center justify-between gap-[10px] rounded-[20px] lg:w-[470px] md:w-[428px] py-[10px] px-[20px] bg-[--background-second-color]  border-[2px] border-solid hover:border-[#FBE0DC] dark:hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
         isFocused
           ? "border-[#FF868E]"
           : "border-[--background-second-color] dark:border-[--dark-mode-darkest-bg]"

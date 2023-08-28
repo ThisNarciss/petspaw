@@ -104,6 +104,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = async () => {
@@ -111,6 +112,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
       const data = await CatServices.getUpload();
       setGallery(data);
       setIsModalOpen(false);
+      document.body.style.overflow = "auto";
     } catch (error) {}
   };
 
@@ -164,7 +166,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
 
   return (
     <CollectionNav>
-      <section className="flex flex-col gap-[10px] w-full">
+      <section className={`flex flex-col gap-[10px] w-full `}>
         <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px]">
           {isModalOpen && (
             <Portal>
@@ -191,7 +193,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex items-center flex-wrap max-w-[640px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[20px] gap-[20px] mb-[20px]"
+            className="flex items-center flex-wrap justify-between max-w-[668px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[20px] gap-[20px] mb-[20px] w-full"
           >
             <label className="text-[10px] uppercase">
               <span className="ml-[10px] leading-[1.8]">Order</span>
@@ -225,7 +227,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
             </label>
 
             <div className="flex items-end justify-between gap-[10px]">
-              <label className="text-[10px] uppercase text-[#8C8C8C] dark:text-[#FFFFFF]">
+              <label className="text-[10px] uppercase ">
                 <span className="ml-[10px] leading-[1.8]">Limit</span>
                 <Select
                   defaultValue={limitOptions[1]}

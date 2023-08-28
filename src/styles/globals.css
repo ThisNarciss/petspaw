@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 :root {
   --foreground-color: #8c8c8c;
   --foreground-second-color: #1d1d1d;
@@ -35,6 +33,10 @@ body {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
+}
+
+div {
+  transition: all 250ms linear;
 }
 
 button {

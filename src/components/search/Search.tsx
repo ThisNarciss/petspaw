@@ -28,7 +28,7 @@ export const Search: FC = () => {
           <BackBtn title="Search" />
           <p>
             Search results for:{" "}
-            <span className="text-[--foreground-second-color] font-medium">
+            <span className="text-[--foreground-second-color] font-medium dark:text-[#FFFFFF]">
               {searchBreeds[0]?.breeds?.name}
             </span>
           </p>

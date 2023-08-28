@@ -6,6 +6,7 @@ import { Navigation } from "@/components/ui/Navigation";
 import { NAV_LINKS } from "@/utils/constants";
 import Link from "next/link";
 import { MaterialUISwitch } from "./Swich.styled";
+import { useRouter } from "next/router";
 
 const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -16,6 +17,7 @@ interface IProps {
 export const SharedLayout: FC<IProps> = ({ children }) => {
   const [isDark, setIsDark] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const { pathname } = useRouter();
 
   useEffect(() => {
     if (localStorage.getItem("theme") === "dark") {
@@ -47,8 +49,12 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
       <div
         className={`lg:container md:container sm:container px-[30px] mx-auto ${jost.className} dark:bg-[--foreground-second-color]`}
       >
-        <main className="flex relative  items-start py-[30px] ">
-          <section className="sticky top-[30px] pl-[117px] pr-[137px] h-[auto] dark:bg-[--foreground-second-color]">
+        <main className="flex relative items-start py-[30px] md:justify-center ">
+          <section
+            className={`sticky top-[30px] lg:pl-[117px] lg:pr-[137px]  h-[auto] dark:bg-[--foreground-second-color] lg:block ${
+              pathname === "/" ? "md:block" : "md:hidden"
+            }`}
+          >
             <div className="mb-[80px] flex items-center justify-between">
               <Link
                 className="fill-current text-[--foreground-second-color] dark:text-[#FFFFFF]"

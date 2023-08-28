@@ -23,7 +23,7 @@ export const CatsGrid: FC<IProps> = ({
     <>
       {Boolean(catsData.length) ? (
         <ul
-          className={`grid grid-cols-home-columns ${
+          className={`grid lg:grid-cols-home-columns md:grid-cols-tablet-columns ${
             catsData.length <= 5 && catsData.length > 0
               ? "grid-rows-threeRows"
               : ""

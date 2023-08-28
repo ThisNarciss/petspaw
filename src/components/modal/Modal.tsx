@@ -58,9 +58,9 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
 
   return (
     <div
-      className={`fixed flex items-center justify-end top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop] ${jost.className}`}
+      className={`fixed flex items-center lg:justify-end md:justify-center top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop] ${jost.className} overflow-y-auto`}
     >
-      <div className="relative h-full w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px]">
+      <div className="relative h-[840px] w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px] overflow-scroll">
         <button
           className="absolute p-[11px] text-[#FF868E] top-6 right-6 fill-current bg-[#FFFFFF] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E]"
           onClick={closeModal}

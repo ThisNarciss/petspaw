@@ -98,11 +98,11 @@ export const Voting: FC<IProps> = ({ cats }) => {
 
   return (
     <CollectionNav>
-      <section className=" w-full">
-        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px] flex flex-col gap-[20px]">
+      <section className=" lg:w-full md">
+        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px]  gap-[20px] flex flex-col">
           <BackBtn title="Voting" />
           <div className="relative mb-[52px]">
-            <div className="flex items-center justify-center rounded-[20px] w-full h-[360px] overflow-hidden">
+            <div className="flex items-center justify-center rounded-[20px] lg:w-full lg:h-[360px] md:h-[376px] overflow-hidden">
               <Image
                 className="rounded-[20px] object-center  object-cover w-full h-full"
                 id={catsData[0].id}

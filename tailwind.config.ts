@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     screens: {
       sm: "375px",
-      md: "1024px",
+      md: "768px",
       lg: "1440px",
     },
     extend: {
@@ -32,6 +32,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "home-columns": "200px 200px 200px",
+        "tablet-columns": "209px 209px 209px",
       },
       gridTemplateRows: {
         threeRows: "140px 140px 140px",

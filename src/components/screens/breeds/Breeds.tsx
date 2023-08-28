@@ -93,7 +93,7 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
     <CollectionNav>
       <section className="flex flex-col gap-[10px] ">
         <div className="p-[20px] bg-[--background-second-color] rounded-[20px] dark:bg-[--dark-mode-bg]">
-          <div className="flex items-center mb-[20px] gap-[10px]">
+          <div className="flex items-center mb-[20px] gap-[10px] justify-between">
             <BackBtn title="Breeds" />
 
             <Select

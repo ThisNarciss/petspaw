@@ -5,6 +5,7 @@ import { LogItem } from "../log-item/LogItem";
 
 import { Jost } from "next/font/google";
 import { Cross } from "@/svg/Cross";
+import { Loader } from "../loader/Loader";
 
 const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -23,6 +24,7 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
   const [catsData, setCatsData] = useState(sendData);
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleImageUpload = (
     image: FormData,
@@ -37,6 +39,7 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       if (uploadImg !== undefined) {
         const data = await CatServices.uploadImage(uploadImg);
         setListItems((prevState) => [
@@ -46,8 +49,11 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
           },
         ]);
         setUrl("");
+        setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -79,9 +85,10 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
           />
           {!url && <p className="">No file selected</p>}
           {url && (
-            <div>
+            <div className="flex flex-col items-center">
               <p className="mb-[20px]">Image File Name: {name}</p>
-              <button className="uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
+              <button className="flex items-center justify-center gap-[5px] uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
+                {isLoading && <Loader width="16" height="16" />}
                 Upload Photo
               </button>
             </div>

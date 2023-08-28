@@ -13,6 +13,7 @@ import { CatServices } from "@/services/CatServices";
 import { LogItem } from "@/components/log-item/LogItem";
 import { DateService } from "@/services/DateService";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Loader } from "@/components/loader/Loader";
 
 interface IProps {
   breedsList: { value: string; label: string }[];
@@ -64,6 +65,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   const [sendOrderData, setSendOrderData] = useState("");
   const [sendTypeData, setSendTypeData] = useState("");
   const [sendBreedData, setSendBreedData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -74,10 +76,17 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const result = await CatServices.getGalleryCat(data);
+    try {
+      setIsLoading(true);
+      const result = await CatServices.getGalleryCat(data);
 
-    setGallery(result);
-    reset();
+      setGallery(result);
+      setIsLoading(false);
+      reset();
+    } catch (error) {
+      setIsLoading(false);
+      reset();
+    }
   };
 
   const selectAllStyles = styledSelect({
@@ -98,9 +107,11 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   };
 
   const closeModal = async () => {
-    const data = await CatServices.getUpload();
-    setGallery(data);
-    setIsModalOpen(false);
+    try {
+      const data = await CatServices.getUpload();
+      setGallery(data);
+      setIsModalOpen(false);
+    } catch (error) {}
   };
 
   const onBtnToFavClick = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -230,7 +241,17 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
               </button>
             </div>
           </form>
-          <CatsGrid catsData={gallery} onClick={onBtnToFavClick} isDelBtnNeed />
+          {!isLoading ? (
+            <CatsGrid
+              catsData={gallery}
+              onClick={onBtnToFavClick}
+              isDelBtnNeed
+            />
+          ) : (
+            <div className="flex items-center justify-center h-[100vh]">
+              <Loader width="200" height="200" />
+            </div>
+          )}
           {Boolean(listItems.length) && (
             <ul className="flex flex-col gap-[10px]">
               {listItems.map((item, idx) => {

@@ -1,3 +1,4 @@
+import { Loader } from "@/components/loader/Loader";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { CatsGrid } from "@/components/ui/CatsGrid";
 import { CollectionNav } from "@/components/ui/CollectionNav";
@@ -26,6 +27,7 @@ const options = [
 export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const [findBreeds, setFindBreeds] = useState(searchBreeds);
   const [breed, setBreed] = useState("all breeds");
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectBreedsStyles = styledSelect({
     width: "226px",
@@ -52,26 +54,38 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const onBreedsChange = async (
     newValue: MultiValue<IOption> | SingleValue<IOption>
   ) => {
-    if (newValue !== null) {
-      if ("label" in newValue) {
-        const { label } = newValue;
+    try {
+      setIsLoading(true);
+      if (newValue !== null) {
+        if ("label" in newValue) {
+          const { label } = newValue;
 
-        const selectedBreed = await CatServices.searchBreeds(label);
-        setFindBreeds(selectedBreed);
-        setBreed(label);
+          const selectedBreed = await CatServices.searchBreeds(label);
+          setFindBreeds(selectedBreed);
+          setBreed(label);
+          setIsLoading(false);
+        }
       }
+    } catch (error) {
+      setIsLoading(false);
     }
   };
   const onLimitsChange = async (
     newValue: MultiValue<IOption> | SingleValue<IOption>
   ) => {
-    if (newValue !== null) {
-      if ("value" in newValue) {
-        const { value } = newValue;
+    try {
+      setIsLoading(true);
+      if (newValue !== null) {
+        if ("value" in newValue) {
+          const { value } = newValue;
 
-        const selectedBreed = await CatServices.searchBreeds(breed, value);
-        setFindBreeds(selectedBreed);
+          const selectedBreed = await CatServices.searchBreeds(breed, value);
+          setFindBreeds(selectedBreed);
+          setIsLoading(false);
+        }
       }
+    } catch (error) {
+      setIsLoading(false);
     }
   };
 
@@ -111,7 +125,13 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
               <SortDown />
             </button>
           </div>
-          <CatsGrid catsData={findBreeds} isDelBtnNeed />
+          {!isLoading ? (
+            <CatsGrid catsData={findBreeds} isDelBtnNeed />
+          ) : (
+            <div className="flex items-center justify-center h-[100vh]">
+              <Loader width="200" height="200" />
+            </div>
+          )}
         </div>
       </section>
     </CollectionNav>

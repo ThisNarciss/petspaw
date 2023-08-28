@@ -1,3 +1,4 @@
+import { UploadBG } from "@/svg/UploadBg";
 import Image from "next/image";
 import { useState, DragEvent, ChangeEvent, FC, useRef } from "react";
 
@@ -73,7 +74,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
 
   return (
     <div
-      className={`border-[2px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] border-dashed rounded-[20px] flex justify-center items-center cursor-pointer bg-[--background-second-color] w-full h-[320px] mb-[20px] dark:bg-[--dark-mode-drop-bg] ${
+      className={`relative border-[2px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] border-dashed rounded-[20px] flex justify-center items-center cursor-pointer bg-[--background-second-color] w-full h-[320px] mb-[20px] dark:bg-[--dark-mode-drop-bg] ${
         highlight ? "border-[#007bff]" : ""
       }`}
       onDragOver={handleDragOver}
@@ -82,17 +83,23 @@ const ImageUploader: FC<ImageUploaderProps> = ({
       onClick={handleImageSelect}
     >
       {!url && (
-        <p>
-          {" "}
-          <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
-            Drag here
-          </span>{" "}
-          your file or{" "}
-          <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
-            Click here
-          </span>{" "}
-          to upload
-        </p>
+        <>
+          <div className="absolute  fill-current text-[--background-color] dark:text-[--dark-mode-drop-bg]">
+            <UploadBG />
+          </div>
+
+          <p className="relative z-[9]">
+            {" "}
+            <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
+              Drag here
+            </span>{" "}
+            your file or{" "}
+            <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
+              Click here
+            </span>{" "}
+            to upload
+          </p>
+        </>
       )}
       <input
         type="file"

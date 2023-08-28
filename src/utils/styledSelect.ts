@@ -20,13 +20,13 @@ export function styledSelect({
   const colorStyles: StylesConfig<IOption> = {
     control: (styles) => ({
       ...styles,
-      padding: "4px 8px",
+      padding: "6px 8px",
       backgroundColor: bgColor,
       width,
       color,
       borderRadius: "10px",
       borderWidth: "2px",
-      borderColor: borderColor,
+      borderColor,
       borderStyle: "solid",
       ":hover": {
         ...styles[":hover"],
@@ -60,6 +60,7 @@ export function styledSelect({
       padding: "0",
       margin: "0",
       border: "none",
+      fontSize: "16px",
       color,
     }),
     singleValue: (styles) => ({

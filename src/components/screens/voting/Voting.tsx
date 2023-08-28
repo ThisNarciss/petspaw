@@ -112,12 +112,12 @@ export const Voting: FC<IProps> = ({ cats }) => {
                 width={640}
                 height={360}
               />
-              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[--background-second-color] border-solid bg-[--background-second-color] rounded-[20px]">
+              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[--background-second-color] border-solid bg-[--background-second-color] rounded-[20px] dark:border-[--dark-mode-black-color] overflow-hidden">
                 <li>
                   <button
                     type="button"
                     onClick={onBtnClickUpVote}
-                    className="p-[25px] bg-[#97EAB9] text-[--background-second-color] rounded-l-[20px] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
+                    className="p-[25px] bg-[#97EAB9] text-[--background-second-color] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
                   >
                     <Like />
                   </button>
@@ -135,7 +135,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickDownVote}
-                    className="p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current rounded-r-[20px] hover:bg-[#ffd3805a] hover:text-[#FFD280]"
+                    className="p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current hover:bg-[#ffd3805a] hover:text-[#FFD280]"
                   >
                     <Dislike />
                   </button>

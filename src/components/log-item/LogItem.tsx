@@ -13,14 +13,14 @@ interface IProps {
 
 export const LogItem: FC<IProps> = ({ time, id, text }) => {
   return typeof text !== "number" ? (
-    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[#F8F8F7] rounded-[10px]">
+    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[#F8F8F7] rounded-[10px] dark:bg-[--dark-mode-drop-bg]">
       <div className="flex items-center gap-[30px]">
-        <p className="px-[10px] py-[3px] text-[--foreground-second-color] text-[16px] leading-6 bg-[--background-second-color] rounded-[5px]">
+        <p className="px-[10px] py-[3px] text-[--foreground-second-color] text-[16px] leading-6 bg-[--background-second-color] rounded-[5px] dark:bg-[--foreground-second-color] dark:text-[--foreground-text-color]">
           {time}
         </p>
         <p className="text-[16px] leading-6">
           Image ID:{" "}
-          <span className="text-[--foreground-second-color] font-medium">
+          <span className="text-[--foreground-second-color] font-medium dark:text-[--foreground-text-color]">
             {id}
           </span>{" "}
           was {text}
@@ -43,10 +43,10 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
       )}
     </li>
   ) : (
-    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[--background-second-color] rounded-[10px]">
+    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[--background-second-color] rounded-[10px] dark:bg-[--dark-mode-drop-bg]">
       {text === 1 && (
         <>
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-[10px] ">
             <div className="text-[#FFD280] fill-current">
               <Done width="20" height="20" />
             </div>

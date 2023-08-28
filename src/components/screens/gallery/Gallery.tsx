@@ -225,7 +225,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
             </label>
 
             <div className="flex items-end justify-between gap-[10px]">
-              <label className="text-[10px] uppercase">
+              <label className="text-[10px] uppercase text-[#8C8C8C] dark:text-[#FFFFFF]">
                 <span className="ml-[10px] leading-[1.8]">Limit</span>
                 <Select
                   defaultValue={limitOptions[1]}
@@ -236,7 +236,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
                 />
               </label>
 
-              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E]">
+              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E] dark:bg-[--foreground-second-color] dark:hover:bg-[#FF868E]">
                 <Reload />
               </button>
             </div>

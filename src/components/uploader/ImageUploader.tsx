@@ -74,7 +74,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
 
   return (
     <div
-      className={`relative border-[2px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] border-dashed rounded-[20px] flex justify-center items-center cursor-pointer bg-[--background-second-color] w-full h-[320px] mb-[20px] dark:bg-[--dark-mode-drop-bg] ${
+      className={`relative border-[2px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] border-dashed rounded-[20px] flex justify-center items-center cursor-pointer bg-[--background-second-color] w-full h-[167px] md:h-[320px] mb-[20px] dark:bg-[--dark-mode-drop-bg] p-[20px] ${
         highlight ? "border-[#007bff]" : ""
       }`}
       onDragOver={handleDragOver}
@@ -84,7 +84,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
     >
       {!url && (
         <>
-          <div className="absolute  fill-current text-[--background-color] dark:text-[--dark-mode-drop-bg]">
+          <div className="absolute  fill-current text-[--background-color] dark:text-[--dark-mode-drop-bg] w-[100px] md:w-[200px] ">
             <UploadBG />
           </div>
 
@@ -110,7 +110,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
       />
       {url && (
         <Image
-          className="max-h-[280px] max-w-[558px] object-cover rounded-[10px]"
+          className="h-[147px] md:h-[280px] max-w-[558px] object-cover rounded-[10px]"
           src={url}
           alt="downloading cat picture"
           width={558}

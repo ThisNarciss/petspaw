@@ -60,14 +60,14 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
     <div
       className={`fixed flex items-center lg:justify-end md:justify-center top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop] ${jost.className} overflow-y-auto`}
     >
-      <div className="relative h-[840px] w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px] overflow-scroll">
+      <div className="relative h-[840px] w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px] overflow-auto">
         <button
           className="absolute p-[11px] text-[#FF868E] top-6 right-6 fill-current bg-[#FFFFFF] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E]"
           onClick={closeModal}
         >
           <Cross />
         </button>
-        <h2 className="text-center text-[36px] text-[--foreground-second-color] font-medium mb-[10px] dark:text-[#FFFFFF]">
+        <h2 className="text-center md:text-[36px] text-[--foreground-second-color] font-medium mb-[10px] dark:text-[#FFFFFF]">
           Upload a .jpg or .png Cat Image
         </h2>
         <p className="mb-[40px]">
@@ -87,7 +87,7 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
           {url && (
             <div className="flex flex-col items-center">
               <p className="mb-[20px]">Image File Name: {name}</p>
-              <button className="flex items-center justify-center gap-[5px] uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
+              <button className="flex w-full md:w-auto items-center justify-center gap-[5px] uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
                 {isLoading && <Loader width="16" height="16" />}
                 Upload Photo
               </button>

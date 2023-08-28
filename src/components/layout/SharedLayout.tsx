@@ -47,12 +47,12 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
         <title>Pets Paw</title>
       </Head>
       <div
-        className={`lg:container md:container sm:container px-[30px] mx-auto ${jost.className} dark:bg-[--foreground-second-color]`}
+        className={`lg:container md:container sm:container px-[20px] md:px-[30px] mx-auto ${jost.className} dark:bg-[--foreground-second-color]`}
       >
         <main className="flex relative items-start py-[30px] md:justify-center ">
           <section
             className={`sticky top-[30px] lg:pl-[117px] lg:pr-[137px]  h-[auto] dark:bg-[--foreground-second-color] lg:block ${
-              pathname === "/" ? "md:block" : "md:hidden"
+              pathname === "/" ? "block" : "hidden"
             }`}
           >
             <div className="mb-[80px] flex items-center justify-between">
@@ -74,7 +74,7 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
                 Lets start using The Cat API
               </h2>
               <nav>
-                <ul className="flex items-center gap-[16px] uppercase">
+                <ul className="flex flex-col md:flex-row items-center gap-[16px] uppercase">
                   <Navigation navLinks={NAV_LINKS} />
                 </ul>
               </nav>

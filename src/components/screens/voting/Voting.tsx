@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC, useState, useRef } from "react";
+import { FC, useState } from "react";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { IProps } from "@/pages/voting";
 import { CatServices } from "@/services/CatServices";
@@ -102,7 +102,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
         <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px]  gap-[20px] flex flex-col">
           <BackBtn title="Voting" />
           <div className="relative mb-[52px]">
-            <div className="flex items-center justify-center rounded-[20px] lg:w-full lg:h-[360px] md:h-[376px] overflow-hidden">
+            <div className="flex items-center justify-center rounded-[20px] lg:w-full lg:h-[360px] md:h-[376px] h-[166px] overflow-hidden">
               <Image
                 className="rounded-[20px] object-center  object-cover w-full h-full"
                 id={catsData[0].id}
@@ -117,7 +117,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickUpVote}
-                    className="p-[25px] bg-[#97EAB9] text-[--background-second-color] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
+                    className="p-[18px] md:p-[25px] bg-[#97EAB9] text-[--background-second-color] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
                   >
                     <Like />
                   </button>
@@ -126,7 +126,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickToFavorite}
-                    className={`p-[25px] bg-[#FF868E] text-[--background-second-color] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
+                    className={`p-[18px] md:p-[25px] bg-[#FF868E] text-[--background-second-color] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
                   >
                     {isFavorite ? <FavoriteFill /> : <Favorite />}
                   </button>
@@ -135,7 +135,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickDownVote}
-                    className="p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current hover:bg-[#ffd3805a] hover:text-[#FFD280]"
+                    className="p-[18px] md:p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current hover:bg-[#ffd3805a] hover:text-[#FFD280]"
                   >
                     <Dislike />
                   </button>

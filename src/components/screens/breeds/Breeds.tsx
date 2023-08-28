@@ -29,10 +29,8 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const [breed, setBreed] = useState("all breeds");
   const [isLoading, setIsLoading] = useState(false);
 
-  const selectBreedsStyles = styledSelect({
-    width: "226px",
-  });
-  const selectLimitStyles = styledSelect({ width: "101px" });
+  const selectBreedsStyles = styledSelect({});
+  const selectLimitStyles = styledSelect({});
 
   const onSortedBtnUpClick = () => {
     const sortedBreeds = [...findBreeds].sort((a, b) => {
@@ -93,11 +91,11 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
     <CollectionNav>
       <section className="flex flex-col gap-[10px] ">
         <div className="p-[20px] bg-[--background-second-color] rounded-[20px] dark:bg-[--dark-mode-bg]">
-          <div className="flex items-center mb-[20px] gap-[10px] justify-between">
+          <div className="flex flex-wrap md:flex-nowrap md:items-center mb-[20px] gap-[10px] ">
             <BackBtn title="Breeds" />
 
             <Select
-              className=""
+              className="w-full md:w-[226px]"
               defaultValue={breedsList[0]}
               options={breedsList}
               styles={selectBreedsStyles}
@@ -105,6 +103,7 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
             />
 
             <Select
+              className="w-[65%] md:w-[101px]"
               defaultValue={options[2]}
               options={options}
               styles={selectLimitStyles}

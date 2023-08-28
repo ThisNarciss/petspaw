@@ -23,7 +23,7 @@ export const CatsGrid: FC<IProps> = ({
     <>
       {Boolean(catsData.length) ? (
         <ul
-          className={`grid lg:grid-cols-home-columns md:grid-cols-tablet-columns ${
+          className={`flex flex-col md:grid lg:grid-cols-home-columns md:grid-cols-tablet-columns ${
             catsData.length <= 5 && catsData.length > 0
               ? "grid-rows-threeRows"
               : ""
@@ -44,7 +44,7 @@ export const CatsGrid: FC<IProps> = ({
           {catsData.map((item, idx) => {
             return (
               <li
-                className={`relative rounded-[20px] overflow-hidden ${
+                className={`h-[206px] md:h-auto relative rounded-[20px] overflow-hidden ${
                   catsData.length > 0 && idx === 0
                     ? "col-start-1 row-start-1 row-end-3"
                     : ""

@@ -90,13 +90,11 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   };
 
   const selectAllStyles = styledSelect({
-    width: "290px",
     color: "#1D1D1D",
     bgColor: "#FFFFFF",
     borderColor: "#FFFFFF",
   });
   const selectLimitStyles = styledSelect({
-    width: "240px",
     color: "#1D1D1D",
     bgColor: "#FFFFFF",
     borderColor: "#FFFFFF",
@@ -180,12 +178,12 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
               />
             </Portal>
           )}
-          <div className="flex items-center justify-between mb-[20px]">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-[10px] mb-[10px] md:mb-[20px]">
             <BackBtn title="Gallery" />
             <button
               onClick={openModal}
               type="button"
-              className="px-[30px] flex items-center gap-[10px] py-[12px] bg-[#FBE0DC] rounded-[10px] uppercase text-[#FF868E] fill-current dark:hover:text-[#FFFFFF] dark:bg-[--dark-mode-second-bg] dark:hover:bg-[#FF868E] text-[12px] font-medium leading-4 tracking-[2px] hover:text-[--background-second-color] hover:bg-[#FF868E]"
+              className="w-full md:w-auto px-[30px] flex items-center gap-[10px] py-[12px] bg-[#FBE0DC] rounded-[10px] uppercase text-[#FF868E] fill-current dark:hover:text-[#FFFFFF] dark:bg-[--dark-mode-second-bg] dark:hover:bg-[#FF868E] text-[12px] font-medium leading-4 tracking-[2px] hover:text-[--background-second-color] hover:bg-[#FF868E]"
             >
               <Upload />
               Upload
@@ -193,9 +191,9 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex items-center flex-wrap justify-between max-w-[668px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[20px] gap-[20px] mb-[20px] w-full"
+            className="flex items-center flex-wrap justify-between max-w-[668px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[10px] md:p-[20px] gap-[20px] mb-[20px] w-full"
           >
-            <label className="text-[10px] uppercase">
+            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
               <span className="ml-[10px] leading-[1.8]">Order</span>
               <Select
                 defaultValue={orderOptions[0]}
@@ -205,7 +203,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
                 onChange={handleOrderSelectChange}
               />
             </label>
-            <label className="text-[10px] uppercase">
+            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
               <span className="ml-[10px] leading-[1.8]">Type</span>
               <Select
                 defaultValue={typeOptions[1]}
@@ -215,7 +213,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
                 onChange={handleTypeSelectChange}
               />
             </label>
-            <label className="text-[10px] uppercase">
+            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
               <span className="ml-[10px] leading-[1.8]">Breed</span>
               <Select
                 defaultValue={breedsList[0]}
@@ -226,8 +224,8 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
               />
             </label>
 
-            <div className="flex items-end justify-between gap-[10px]">
-              <label className="text-[10px] uppercase ">
+            <div className="flex flex-wrap md:flex-nowrap items-end justify-between gap-[10px]">
+              <label className="text-[10px] uppercase w-[275px] md:w-[240px]">
                 <span className="ml-[10px] leading-[1.8]">Limit</span>
                 <Select
                   defaultValue={limitOptions[1]}
@@ -238,7 +236,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
                 />
               </label>
 
-              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E] dark:bg-[--foreground-second-color] dark:hover:bg-[#FF868E]">
+              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E] dark:bg-[--foreground-second-color] dark:hover:bg-[#FF868E] w-full md:w-auto flex items-center justify-center">
                 <Reload />
               </button>
             </div>

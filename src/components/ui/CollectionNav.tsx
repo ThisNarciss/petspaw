@@ -29,14 +29,16 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col gap-[10px] w-full relative overflow-hidden">
-      <header className="flex items-center justify-between gap-[10px] overflow-hidden">
+      <header className="flex md:items-center md:flex-nowrap flex-wrap justify-between gap-[10px] overflow-hidden">
         <button
           onClick={onBurgerBtnClick}
-          className="fill-current bg-[#FFFFFF] rounded-[20px] text-[#FF868E] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] px-[15px] py-[21px]  lg:hidden"
+          className="fill-current bg-[#FFFFFF] rounded-[20px] text-[#FF868E] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] px-[15px] py-[21px]  lg:hidden mr-auto md:mr-[0px]"
         >
           <Burger />
         </button>
+
         <SearchForm />
+
         {VOTES_LINKS.map((link) => {
           const isActive = link.href === pathname;
           return (
@@ -57,7 +59,7 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
         })}
       </header>
       <div
-        className={`flex items-start justify-center gap-[16px] transition-transform lg:hidden w-[100%] h-[100%] top-0 left-0 absolute bg-[#F8F8F7] z-[999] rounded-[20px] ${
+        className={`block md:flex items-start justify-center gap-[16px] transition-transform lg:hidden w-[100%] h-[100%] top-0 left-0 absolute bg-[#F8F8F7] z-[999] rounded-[20px] ${
           isMenuOpen ? "translate-x-[0%]" : "translate-x-[-100%]"
         } pt-[110px] dark:bg-[--foreground-second-color]`}
       >
@@ -73,7 +75,9 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
         >
           <Cross />
         </button>
-        <Navigation navLinks={NAV_LINKS} />
+        <ul className="flex flex-col md:flex-row items-center gap-[16px] uppercase">
+          <Navigation navLinks={NAV_LINKS} />
+        </ul>
       </div>
       {children}
     </div>

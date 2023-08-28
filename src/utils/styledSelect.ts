@@ -5,14 +5,12 @@ interface IOption {
   readonly label: string;
 }
 interface IParams {
-  width?: string;
   color?: string;
   bgColor?: string;
   borderColor?: string;
 }
 
 export function styledSelect({
-  width,
   bgColor = "#F8F8F7",
   color = "#8C8C8C",
   borderColor = "#F8F8F7",
@@ -22,7 +20,7 @@ export function styledSelect({
       ...styles,
       padding: "6px 8px",
       backgroundColor: bgColor,
-      width,
+      width: "100%",
       color,
       borderRadius: "10px",
       borderWidth: "2px",

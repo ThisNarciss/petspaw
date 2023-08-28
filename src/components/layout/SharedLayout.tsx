@@ -1,6 +1,6 @@
 import { Jost } from "next/font/google";
 import { Logo } from "@/svg/Logo";
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useState, useEffect } from "react";
 import Head from "next/head";
 import { Navigation } from "@/components/ui/Navigation";
 import { NAV_LINKS } from "@/utils/constants";
@@ -15,13 +15,26 @@ interface IProps {
 
 export const SharedLayout: FC<IProps> = ({ children }) => {
   const [isDark, setIsDark] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsChecked(true);
+      setIsDark(true);
+    }
+  }, []);
 
   const onBtnClick = () => {
     if (!isDark) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsChecked(true);
       setIsDark(true);
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "white");
+      setIsChecked(false);
       setIsDark(false);
     }
   };
@@ -43,7 +56,7 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
               >
                 <Logo />
               </Link>
-              <MaterialUISwitch onClick={onBtnClick} />
+              <MaterialUISwitch onClick={onBtnClick} checked={isChecked} />
             </div>
 
             <h1 className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] text-[44px] leading-[1.32] font-medium mb-[10px]">

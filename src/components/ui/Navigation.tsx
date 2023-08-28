@@ -56,7 +56,7 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
               href={link.href}
             >
               <div
-                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] hidden md:block group-hover:border-[--background-second-color] h-[198px] ${bgColor} ${
+                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] hidden md:flex group-hover:border-[--background-second-color] h-[198px] ${bgColor} ${
                   isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
                 }`}
               >

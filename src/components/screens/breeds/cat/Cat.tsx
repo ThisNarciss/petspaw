@@ -64,13 +64,13 @@ export const Cat: FC = () => {
           </div>
           {Boolean(cat.length) && (
             <div>
-              <div className=" flex  justify-center h-[ mb-[50px] relative w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] h-[360px]">
+              <div className=" flex  justify-center mb-[50px] relative w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px]">
                 <div className="flex">
                   {cat.map((item, index) => {
                     return (
                       <div
                         key={item.id}
-                        className={`rounded-[20px] overflow-hidden w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] h-[360px] absolute top-0 left-0 ${
+                        className={`rounded-[20px] overflow-hidden w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] absolute top-0 left-0 ${
                           index === currentSlide ? "opacity-100" : "opacity-0"
                         }`}
                       >
@@ -86,7 +86,7 @@ export const Cat: FC = () => {
                     );
                   })}
                 </div>
-                <div className="p-[10px] bottom-[-15px] md:bottom-[-30px] lg:bottom-[-15px] absolute flex items-start gap-[5px] z-10 rounded-[20px] bg-[--background-second-color] dark:bg-[#282828]">
+                <div className="p-[10px] bottom-[-15px] absolute flex items-start gap-[5px] z-10 rounded-[20px] bg-[--background-second-color] dark:bg-[#282828]">
                   {btnInx.map((item, idx) => {
                     return (
                       <button

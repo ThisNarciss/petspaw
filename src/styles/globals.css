@@ -43,10 +43,6 @@ form {
   transition: all 250ms linear;
 }
 
-div {
-  transition: all 250ms linear;
-}
-
 button {
   padding: 0;
   cursor: pointer;

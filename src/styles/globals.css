@@ -35,6 +35,14 @@ body {
   line-height: 1.5;
 }
 
+p {
+  transition: all 250ms linear;
+}
+
+form {
+  transition: all 250ms linear;
+}
+
 div {
   transition: all 250ms linear;
 }

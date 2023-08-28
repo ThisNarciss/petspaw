@@ -25,7 +25,6 @@ interface ICatInfo {
 export const Cat: FC = () => {
   const [cat, setCat] = useState<ICatInfo[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(cat);
 
   const {
     query: { id },

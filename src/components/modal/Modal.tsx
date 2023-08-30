@@ -1,4 +1,5 @@
 import React, { useState, FC, FormEvent } from "react";
+import { Notify } from "notiflix";
 import ImageUploader from "../uploader/ImageUploader";
 import { CatServices } from "@/services/CatServices";
 import { LogItem } from "../log-item/LogItem";
@@ -49,7 +50,8 @@ export const Modal: FC<IProps> = ({ closeModal }) => {
         setUrl("");
         setIsLoading(false);
       }
-    } catch (error) {
+    } catch (error: any) {
+      Notify.failure(error.message);
       setIsLoading(false);
     }
   };

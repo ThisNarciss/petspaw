@@ -1,3 +1,6 @@
+import { Notify } from "notiflix";
+import { FC, useState } from "react";
+import Select, { MultiValue, SingleValue } from "react-select";
 import { Loader } from "@/components/loader/Loader";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { CatsGrid } from "@/components/ui/CatsGrid";
@@ -7,10 +10,6 @@ import { CatServices } from "@/services/CatServices";
 import { SortDown } from "@/svg/SortDown";
 import { SortUp } from "@/svg/SortUp";
 import { styledSelect } from "@/utils/styledSelect";
-
-import { FC, useState } from "react";
-
-import Select, { MultiValue, SingleValue } from "react-select";
 
 interface IOption {
   readonly value: string;
@@ -64,7 +63,8 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
           setIsLoading(false);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      Notify.failure(error.message);
       setIsLoading(false);
     }
   };
@@ -82,7 +82,8 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
           setIsLoading(false);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      Notify.failure(error.message);
       setIsLoading(false);
     }
   };

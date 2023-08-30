@@ -1,4 +1,5 @@
 import Select from "react-select";
+import { Notify } from "notiflix";
 import { FC, Dispatch } from "react";
 import { Reload } from "@/svg/Reload";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -58,7 +59,8 @@ export const FilterForm: FC<IProps> = ({
       setGallery(result);
       setIsLoading(false);
       reset();
-    } catch (error) {
+    } catch (error: any) {
+      Notify.failure(error.message);
       setIsLoading(false);
       reset();
     }

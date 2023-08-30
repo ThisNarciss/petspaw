@@ -1,8 +1,8 @@
 import React, { useState, FC, MouseEvent } from "react";
+import { Notify } from "notiflix";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { CollectionNav } from "@/components/ui/CollectionNav";
 import { Upload } from "@/svg/Upload";
-
 import { Modal } from "@/components/modal/Modal";
 import Portal from "@/portal/Portal";
 import { CatsGrid } from "@/components/ui/CatsGrid";
@@ -52,10 +52,12 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   const closeModal = async () => {
     try {
       const data = await CatServices.getUpload();
+      document.body.style.overflow = "auto";
       setGallery(data);
       setIsModalOpen(false);
-      document.body.style.overflow = "auto";
-    } catch (error) {}
+    } catch (error: any) {
+      Notify.failure(error.message);
+    }
   };
 
   const onBtnToFavClick = async (e: MouseEvent<HTMLButtonElement>) => {

@@ -11,17 +11,15 @@ const jost = Jost({ subsets: ["latin"], weight: ["400", "500"] });
 
 interface IProps {
   closeModal: () => void;
-  sendData: { order: string; type: string; breed: string };
 }
 
 interface IListItem {
   text: number;
 }
 
-export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
+export const Modal: FC<IProps> = ({ closeModal }) => {
   const [uploadImg, setUploadImg] = useState<FormData>();
   const [listItems, setListItems] = useState<IListItem[]>([]);
-  const [catsData, setCatsData] = useState(sendData);
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -57,14 +55,9 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
   };
 
   return (
-    <div
-      className={`fixed flex items-center lg:justify-end md:justify-center top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop] ${jost.className} overflow-y-auto`}
-    >
-      <div className="relative h-[840px] w-[680px] px-[20px] text-center bg-[--background-color] dark:bg-[#282828] rounded-[20px] py-[100px] overflow-auto">
-        <button
-          className="absolute p-[11px] text-[#FF868E] top-6 right-6 fill-current bg-[#FFFFFF] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E]"
-          onClick={closeModal}
-        >
+    <div className={`modal-backdrop ${jost.className}`}>
+      <div className="modal-box">
+        <button className="modal-close-btn" onClick={closeModal}>
           <Cross />
         </button>
         <h2 className="text-center md:text-[36px] text-[--foreground-second-color] font-medium mb-[10px] dark:text-[#FFFFFF]">
@@ -78,16 +71,15 @@ export const Modal: FC<IProps> = ({ closeModal, sendData }) => {
           upload guidelines
         </p>
         <form className="mb-[20px]" onSubmit={handleSubmit}>
-          <ImageUploader
-            onImageUpload={handleImageUpload}
-            url={url}
-            sendCatData={catsData}
-          />
+          <ImageUploader onImageUpload={handleImageUpload} url={url} />
           {!url && <p className="">No file selected</p>}
           {url && (
             <div className="flex flex-col items-center">
-              <p className="mb-[20px]">Image File Name: {name}</p>
-              <button className="flex w-full md:w-auto items-center justify-center gap-[5px] uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px]">
+              <p className="mb-[20px] w-full overflow-hidden">
+                Image File Name:
+                <br /> {name}
+              </p>
+              <button className="modal-form-btn">
                 {isLoading && <Loader width="16" height="16" />}
                 Upload Photo
               </button>

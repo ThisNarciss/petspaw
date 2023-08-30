@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .search-form {
+    @apply flex items-center order-last md:order-none w-full justify-between gap-[10px] rounded-[20px] lg:w-[470px] md:w-[428px] py-[10px] px-[20px] bg-[--background-second-color]  border-[2px] border-solid hover:border-[#FBE0DC] dark:hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid dark:bg-[--dark-mode-bg];
+  }
+  .search-input {
+    @apply placeholder:text-[--foreground-color] w-full outline-none dark:bg-[--dark-mode-darkest-bg];
+  }
+  .search-error-msg {
+    @apply absolute bottom-[-15px] left-0 text-[12px] text-red-600;
+  }
+  .search-btn {
+    @apply p-[10px] bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg] rounded-[10px] text-[#FF868E] fill-current hover:text-[--background-second-color] hover:bg-[#FF868E] dark:hover:bg-[#FF868E];
+  }
+  .layout-container {
+    @apply lg:container md:container sm:container px-[20px] md:px-[30px] mx-auto dark:bg-[--foreground-second-color];
+  }
+  .layout-main {
+    @apply flex relative items-start py-[30px] md:justify-center;
+  }
+  .layout-sec {
+    @apply sticky top-[30px] lg:pl-[117px] lg:pr-[137px]  h-[auto] dark:bg-[--foreground-second-color] lg:block;
+  }
+  .layout-link {
+    @apply fill-current text-[--foreground-second-color] dark:text-[#FFFFFF];
+  }
+  .layout-title {
+    @apply text-[var(--foreground-second-color)] dark:text-[#FFFFFF] text-[44px] leading-[1.32] font-medium mb-[10px];
+  }
+  .log-item {
+    @apply flex flex-wrap md:flex-nowrap items-center justify-between md:justify-start px-[25px] py-[18px] bg-[#F8F8F7] rounded-[10px] dark:bg-[--dark-mode-drop-bg];
+  }
+  .log-time {
+    @apply px-[10px] py-[3px] text-[--foreground-second-color] text-[16px] leading-6 bg-[--background-second-color] rounded-[5px] dark:bg-[--foreground-second-color] dark:text-[--foreground-text-color] mr-[20px];
+  }
+  .modal-backdrop {
+    @apply fixed flex items-center lg:justify-end justify-center top-0 left-0 w-[100vw] h-[100vh] p-[30px] bg-[--backdrop];
+  }
+  .modal-box {
+    @apply relative max-w-[375px] h-[98vh] md:max-w-[680px] px-[20px] bg-[--background-color] text-center dark:bg-[#282828] rounded-[20px] py-[100px] overflow-auto;
+  }
+  .modal-close-btn {
+    @apply absolute p-[11px] text-[#FF868E] top-6 right-6 fill-current bg-[#FFFFFF] rounded-[10px] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E];
+  }
+  .modal-form-btn {
+    @apply flex w-full md:w-auto items-center justify-center gap-[5px] uppercase bg-[#FF868E] text-[--background-second-color] text-[12px] font-medium px-[30px] py-[12px] rounded-[10px] leading-4 tracking-[2px];
+  }
+}
+
 :root {
   --foreground-color: #8c8c8c;
   --foreground-second-color: #1d1d1d;

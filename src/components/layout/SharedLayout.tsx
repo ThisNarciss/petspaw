@@ -46,33 +46,26 @@ export const SharedLayout: FC<IProps> = ({ children }) => {
       <Head>
         <title>Pets Paw</title>
       </Head>
-      <div
-        className={`lg:container md:container sm:container px-[20px] md:px-[30px] mx-auto ${jost.className} dark:bg-[--foreground-second-color]`}
-      >
-        <main className="flex relative items-start py-[30px] md:justify-center ">
+      <div className={`layout-container ${jost.className} `}>
+        <main className="layout-main">
           <section
             className={`sticky top-[30px] lg:pl-[117px] lg:pr-[137px]  h-[auto] dark:bg-[--foreground-second-color] lg:block ${
               pathname === "/" ? "block" : "hidden"
             }`}
           >
             <div className="mb-[80px] flex items-center justify-between">
-              <Link
-                className="fill-current text-[--foreground-second-color] dark:text-[#FFFFFF]"
-                href="/"
-              >
+              <Link className="layout-link" href="/">
                 <Logo />
               </Link>
               <MaterialUISwitch onClick={onBtnClick} checked={isChecked} />
             </div>
 
-            <h1 className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] text-[44px] leading-[1.32] font-medium mb-[10px]">
-              Hi!👋
-            </h1>
+            <h1 className="layout-title">Hi!👋</h1>
             <p className="mb-[60px]">Welcome to MacPaw Bootcamp 2023</p>
             <div>
-              <h2 className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] font-medium mb-[20px]">
+              <p className="text-[var(--foreground-second-color)] dark:text-[#FFFFFF] font-medium mb-[20px]">
                 Lets start using The Cat API
-              </h2>
+              </p>
               <nav>
                 <ul className="flex flex-col md:flex-row items-center gap-[16px] uppercase">
                   <Navigation navLinks={NAV_LINKS} />

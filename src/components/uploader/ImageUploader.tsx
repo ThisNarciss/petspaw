@@ -5,14 +5,9 @@ import { useState, DragEvent, ChangeEvent, FC, useRef } from "react";
 interface ImageUploaderProps {
   onImageUpload: (image: FormData, name: string, imageUrl: string) => void;
   url: string;
-  sendCatData: { order: string; type: string; breed: string };
 }
 
-const ImageUploader: FC<ImageUploaderProps> = ({
-  onImageUpload,
-  url,
-  sendCatData,
-}) => {
+const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
   const [highlight, setHighlight] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -55,7 +50,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
   const handleImage = (file: File) => {
     const reader = new FileReader();
     const formData = new FormData();
-    formData.append("file", file, JSON.stringify(sendCatData));
+    formData.append("file", file, "file name");
 
     if (file.type.startsWith("image/jp") || file.type.startsWith("image/png")) {
       reader.onload = (e) => {

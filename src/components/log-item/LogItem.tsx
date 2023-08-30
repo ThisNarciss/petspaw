@@ -13,10 +13,8 @@ interface IProps {
 
 export const LogItem: FC<IProps> = ({ time, id, text }) => {
   return typeof text !== "number" ? (
-    <li className="flex flex-wrap md:flex-nowrap items-center justify-between md:justify-start px-[25px] py-[18px] bg-[#F8F8F7] rounded-[10px] dark:bg-[--dark-mode-drop-bg]">
-      <p className="px-[10px] py-[3px] text-[--foreground-second-color] text-[16px] leading-6 bg-[--background-second-color] rounded-[5px] dark:bg-[--foreground-second-color] dark:text-[--foreground-text-color] mr-[20px]">
-        {time}
-      </p>
+    <li className="log-item">
+      <p className="log-time">{time}</p>
       <p className="order-3 md:order-none text-[16px] leading-6 md:mr-auto">
         Image ID:{" "}
         <span className="text-[--foreground-second-color] font-medium dark:text-[--foreground-text-color]">

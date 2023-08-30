@@ -39,11 +39,11 @@ export const SearchForm = () => {
 
   return (
     <form
-      className={`flex items-center order-last md:order-none w-full justify-between gap-[10px] rounded-[20px] lg:w-[470px] md:w-[428px] py-[10px] px-[20px] bg-[--background-second-color]  border-[2px] border-solid hover:border-[#FBE0DC] dark:hover:border-[#FBE0DC] hover:border-[2px] hover:border-solid ${
+      className={`search-form ${
         isFocused
           ? "border-[#FF868E]"
           : "border-[--background-second-color] dark:border-[--dark-mode-darkest-bg]"
-      } dark:bg-[--dark-mode-bg]`}
+      } `}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="relative w-full">
@@ -51,20 +51,18 @@ export const SearchForm = () => {
           onFocus={handleFocus}
           onChange={onChange}
           onBlur={handleBlur}
-          className="placeholder:text-[--foreground-color] w-full outline-none dark:bg-[--dark-mode-darkest-bg]"
+          className="search-input"
           placeholder="Search for breeds by name"
           defaultValue={watch("search")}
           name={name}
           ref={ref}
         />
         {errors.search && (
-          <span className="absolute bottom-[-15px] left-0 text-[12px] text-red-600">
-            This field is required
-          </span>
+          <span className="search-error-msg">This field is required</span>
         )}
       </div>
 
-      <button className="p-[10px] bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg] rounded-[10px] text-[#FF868E] fill-current hover:text-[--background-second-color] hover:bg-[#FF868E] dark:hover:bg-[#FF868E]">
+      <button className="search-btn">
         <Search />
       </button>
     </form>

@@ -1,42 +1,22 @@
-import Select from "react-select";
 import React, { useState, FC, MouseEvent } from "react";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { CollectionNav } from "@/components/ui/CollectionNav";
 import { Upload } from "@/svg/Upload";
-import { Reload } from "@/svg/Reload";
+
 import { Modal } from "@/components/modal/Modal";
 import Portal from "@/portal/Portal";
 import { CatsGrid } from "@/components/ui/CatsGrid";
 import { ICat } from "@/ts/interfaces";
-import { styledSelect } from "@/utils/styledSelect";
 import { CatServices } from "@/services/CatServices";
 import { LogItem } from "@/components/log-item/LogItem";
 import { DateService } from "@/services/DateService";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { Loader } from "@/components/loader/Loader";
+import { FilterForm } from "@/components/form/FilterForm";
 
 interface IProps {
   breedsList: { value: string; label: string }[];
   uploadGallery: ICat[];
 }
-
-const limitOptions = [
-  { value: "5", label: "5 items per page" },
-  { value: "10", label: "10 items per page" },
-  { value: "15", label: "15 items per page" },
-  { value: "20", label: "20 items per page" },
-];
-
-const orderOptions = [
-  { value: "RANDOME", label: "Random" },
-  { value: "DESC", label: "Desc" },
-  { value: "ASC", label: "Asc" },
-];
-const typeOptions = [
-  { value: "jpg,gif,png", label: "All" },
-  { value: "jpg,png", label: "Static" },
-  { value: "gif", label: "Animated" },
-];
 
 interface IFavCat {
   id: number;
@@ -62,43 +42,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   const [listItems, setListItems] = useState<IListItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [gallery, setGallery] = useState(uploadGallery);
-  const [sendOrderData, setSendOrderData] = useState("");
-  const [sendTypeData, setSendTypeData] = useState("");
-  const [sendBreedData, setSendBreedData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm<Inputs>();
-
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      setIsLoading(true);
-      const result = await CatServices.getGalleryCat(data);
-
-      setGallery(result);
-      setIsLoading(false);
-      reset();
-    } catch (error) {
-      setIsLoading(false);
-      reset();
-    }
-  };
-
-  const selectAllStyles = styledSelect({
-    color: "#1D1D1D",
-    bgColor: "#FFFFFF",
-    borderColor: "#FFFFFF",
-  });
-  const selectLimitStyles = styledSelect({
-    color: "#1D1D1D",
-    bgColor: "#FFFFFF",
-    borderColor: "#FFFFFF",
-  });
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -146,36 +90,13 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
     }
   };
 
-  const handleOrderSelectChange = (selectedOptions: any) => {
-    setSendOrderData(selectedOptions.value);
-    setValue("order", selectedOptions.value);
-  };
-  const handleTypeSelectChange = (selectedOptions: any) => {
-    setSendTypeData(selectedOptions.value);
-    setValue("type", selectedOptions.value);
-  };
-  const handleBreedSelectChange = (selectedOptions: any) => {
-    setSendBreedData(selectedOptions.value);
-    setValue("breed", selectedOptions.value);
-  };
-  const handleLimitSelectChange = (selectedOptions: any) => {
-    setValue("limit", selectedOptions.value);
-  };
-
   return (
     <CollectionNav>
       <section className={`flex flex-col gap-[10px] w-full `}>
         <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px]">
           {isModalOpen && (
             <Portal>
-              <Modal
-                closeModal={closeModal}
-                sendData={{
-                  order: sendOrderData,
-                  type: sendTypeData,
-                  breed: sendBreedData,
-                }}
-              />
+              <Modal closeModal={closeModal} />
             </Portal>
           )}
           <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-[10px] mb-[10px] md:mb-[20px]">
@@ -189,58 +110,11 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
               Upload
             </button>
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex items-center flex-wrap justify-between max-w-[668px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[10px] md:p-[20px] gap-[20px] mb-[20px] w-full"
-          >
-            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
-              <span className="ml-[10px] leading-[1.8]">Order</span>
-              <Select
-                defaultValue={orderOptions[0]}
-                options={orderOptions}
-                styles={selectAllStyles}
-                {...register("order")}
-                onChange={handleOrderSelectChange}
-              />
-            </label>
-            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
-              <span className="ml-[10px] leading-[1.8]">Type</span>
-              <Select
-                defaultValue={typeOptions[1]}
-                options={typeOptions}
-                styles={selectAllStyles}
-                {...register("type")}
-                onChange={handleTypeSelectChange}
-              />
-            </label>
-            <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
-              <span className="ml-[10px] leading-[1.8]">Breed</span>
-              <Select
-                defaultValue={breedsList[0]}
-                options={breedsList}
-                styles={selectAllStyles}
-                {...register("breed")}
-                onChange={handleBreedSelectChange}
-              />
-            </label>
-
-            <div className="flex flex-wrap md:flex-nowrap items-end justify-between gap-[10px]">
-              <label className="text-[10px] uppercase w-[275px] md:w-[240px]">
-                <span className="ml-[10px] leading-[1.8]">Limit</span>
-                <Select
-                  defaultValue={limitOptions[1]}
-                  options={limitOptions}
-                  styles={selectLimitStyles}
-                  {...register("limit")}
-                  onChange={handleLimitSelectChange}
-                />
-              </label>
-
-              <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E] dark:bg-[--foreground-second-color] dark:hover:bg-[#FF868E] w-full md:w-auto flex items-center justify-center">
-                <Reload />
-              </button>
-            </div>
-          </form>
+          <FilterForm
+            setIsLoading={setIsLoading}
+            setGallery={setGallery}
+            breedsList={breedsList}
+          />
           {!isLoading ? (
             <CatsGrid
               catsData={gallery}

@@ -1,4 +1,4 @@
-import { NAV_LINKS, VOTES_LINKS } from "@/utils/constants";
+import { VOTES_LINKS } from "@/utils/constants";
 import { FC, ReactNode, useState } from "react";
 import { SearchForm } from "../form/SearchForm";
 import Link from "next/link";
@@ -7,9 +7,7 @@ import { Favorite } from "@/svg/Favorite";
 import { Dislike } from "@/svg/Dislike";
 import { useRouter } from "next/router";
 import { Burger } from "@/svg/Burger";
-import { Navigation } from "./Navigation";
-import { Cross } from "@/svg/Cross";
-import { Logo } from "@/svg/Logo";
+import { BurgerMenu } from "./BurgerMenu";
 
 interface IProps {
   children: ReactNode;
@@ -58,27 +56,7 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
           );
         })}
       </header>
-      <div
-        className={`block md:flex items-start justify-center gap-[16px] transition-transform lg:hidden w-[100%] h-[100%] top-0 left-0 absolute bg-[#F8F8F7] z-[999] rounded-[20px] ${
-          isMenuOpen ? "translate-x-[0%]" : "translate-x-[-100%]"
-        } pt-[110px] dark:bg-[--foreground-second-color]`}
-      >
-        <Link
-          className="absolute left-[30px] top-[30px] fill-current text-[--foreground-second-color] dark:text-[#FFFFFF]"
-          href="/"
-        >
-          <Logo />
-        </Link>
-        <button
-          className="absolute right-[30px] top-[30px] p-[18px] rounded-[20px] fill-current bg-[#FFFFFF] text-[#FF868E] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] dark:hover:bg-[#FF868E]"
-          onClick={onBurgerBtnClick}
-        >
-          <Cross />
-        </button>
-        <ul className="flex flex-col md:flex-row items-center gap-[16px] uppercase">
-          <Navigation navLinks={NAV_LINKS} />
-        </ul>
-      </div>
+      <BurgerMenu isMenuOpen={isMenuOpen} onBurgerBtnClick={onBurgerBtnClick} />
       {children}
     </div>
   );

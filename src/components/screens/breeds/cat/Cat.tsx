@@ -56,7 +56,7 @@ export const Cat: FC = () => {
               bgColor="bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
               color="#FF868E"
             />
-            <div className="py-[5px] px-[15px] md:px-[30px] rounded-[10px] bg-[#FF868E]">
+            <div className="py-[5px] text-center px-[5px] w-full md:w-auto md:px-[30px] rounded-[10px] bg-[#FF868E]">
               <h2 className="uppercase text-[--background-second-color] font-medium tracking-[2px]">
                 {id}
               </h2>
@@ -64,18 +64,18 @@ export const Cat: FC = () => {
           </div>
           {Boolean(cat.length) && (
             <div>
-              <div className=" flex  justify-center mb-[50px] relative w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px]">
+              <div className=" flex  justify-center mb-[50px] relative w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px]">
                 <div className="flex">
                   {cat.map((item, index) => {
                     return (
                       <div
                         key={item.id}
-                        className={`rounded-[20px] overflow-hidden w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] absolute top-0 left-0 ${
+                        className={`rounded-[20px] overflow-hidden w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] absolute top-0 left-0 ${
                           index === currentSlide ? "opacity-100" : "opacity-0"
                         }`}
                       >
                         <Image
-                          className="object-cover w-[295px] h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] object-center"
+                          className="object-cover w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] object-center"
                           src={`${item.url}`}
                           sizes="100vw"
                           alt="cat picture"

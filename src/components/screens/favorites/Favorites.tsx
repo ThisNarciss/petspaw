@@ -1,9 +1,7 @@
 import { useState, FC } from "react";
 import { BackBtn } from "@/components/ui/BackBtn";
 import { CollectionNav } from "@/components/ui/CollectionNav";
-import Image from "next/image";
 import { LogItem } from "@/components/log-item/LogItem";
-import { FavoriteFill } from "@/svg/FavoriteFill";
 import { DateService } from "@/services/DateService";
 import { MouseEvent } from "react";
 import { CatServices } from "@/services/CatServices";

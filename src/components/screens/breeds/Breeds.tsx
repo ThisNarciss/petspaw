@@ -8,8 +8,8 @@ import { SortDown } from "@/svg/SortDown";
 import { SortUp } from "@/svg/SortUp";
 import { styledSelect } from "@/utils/styledSelect";
 
-import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FC, useState } from "react";
+
 import Select, { MultiValue, SingleValue } from "react-select";
 
 interface IOption {

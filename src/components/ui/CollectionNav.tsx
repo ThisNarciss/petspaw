@@ -26,11 +26,11 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex flex-col gap-[10px] w-full relative overflow-hidden">
-      <header className="flex md:items-center md:flex-nowrap flex-wrap justify-between gap-[10px] overflow-hidden">
+    <div className="collection-nav-box">
+      <header className="collection-nav-header">
         <button
           onClick={onBurgerBtnClick}
-          className="fill-current bg-[#FFFFFF] rounded-[20px] text-[#FF868E] hover:text-[#FFFFFF] hover:bg-[#FF868E] dark:bg-[--dark-mode-drop-bg] px-[15px] py-[21px]  lg:hidden mr-auto md:mr-[0px]"
+          className="collection-nav-burger-btn"
         >
           <Burger />
         </button>
@@ -42,7 +42,7 @@ export const CollectionNav: FC<IProps> = ({ children }) => {
           return (
             <Link
               key={link.href}
-              className={`p-[15px] rounded-[20px]  hover:bg-[#FBE0DC] fill-current  dark:hover:bg-[#FBE0DC] ${
+              className={`collection-nav-link ${
                 isActive
                   ? "bg-[#FF868E] text-[--background-second-color]"
                   : "bg-[--background-second-color] text-[#FF868E] dark:bg-[--dark-mode-second-bg]"

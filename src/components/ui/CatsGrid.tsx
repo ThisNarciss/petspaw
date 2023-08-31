@@ -23,7 +23,7 @@ export const CatsGrid: FC<IProps> = ({
     <>
       {Boolean(catsData.length) ? (
         <ul
-          className={`flex flex-col md:grid lg:grid-cols-home-columns md:grid-cols-tablet-columns ${
+          className={`cat-grid-list ${
             catsData.length <= 5 && catsData.length > 0
               ? "grid-rows-threeRows"
               : ""
@@ -44,7 +44,7 @@ export const CatsGrid: FC<IProps> = ({
           {catsData.map((item, idx) => {
             return (
               <li
-                className={`h-[206px] md:h-auto relative rounded-[20px] overflow-hidden ${
+                className={`cat-grid-item ${
                   catsData.length > 0 && idx === 0
                     ? "col-start-1 row-start-1 row-end-3"
                     : ""
@@ -130,21 +130,22 @@ export const CatsGrid: FC<IProps> = ({
                 key={item.id}
               >
                 <Image
-                  className="rounded-[20px] object-center  object-cover w-full h-full"
+                  className="cat-grid-img"
                   src={item.image.url}
                   alt="cat picture"
                   width={640}
                   height={360}
+                  priority
                 />
 
                 {isDelBtnNeed && (
-                  <div className="absolute top-0 left-0 w-full h-full bg-[--img-hover] rounded-[20px] flex items-center justify-center opacity-0  hover:opacity-100 p-[10px]">
+                  <div className="cat-grid-btn-box">
                     {pathname === "/favorites" && (
                       <button
                         type="button"
                         id={item.id.toString()}
                         onClick={onClick}
-                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] dark:bg-[#282828] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] dark:hover:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF]"
+                        className="cat-grid-btn"
                       >
                         <FavoriteFill />
                       </button>
@@ -153,7 +154,7 @@ export const CatsGrid: FC<IProps> = ({
                       <Link
                         id={item.id.toString()}
                         href={`/breeds/${item.breeds?.id}`}
-                        className="fill-current text-center text-[16px] text-[#FF868E] bg-[#FFFFFF] w-full py-[5px] rounded-[10px] focus:text-[#FFFFFF] self-end hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF] dark:bg-[#282828] dark:hover:bg-[#FF868E]"
+                        className="cat-grid-link"
                       >
                         {item.breeds?.name}
                       </Link>
@@ -164,7 +165,7 @@ export const CatsGrid: FC<IProps> = ({
                         type="button"
                         id={item.id.toString()}
                         onClick={onClick}
-                        className="fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF] dark:bg-[#282828] dark:hover:bg-[#FF868E]"
+                        className="cat-grid-btn-fav"
                       >
                         {<Favorite />}
                       </button>

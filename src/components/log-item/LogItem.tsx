@@ -16,11 +16,7 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
     <li className="log-item">
       <p className="log-time">{time}</p>
       <p className="order-3 md:order-none text-[16px] leading-6 md:mr-auto">
-        Image ID:{" "}
-        <span className="text-[--foreground-second-color] font-medium dark:text-[--foreground-text-color]">
-          {id}
-        </span>{" "}
-        was {text}
+        Image ID: <span className="log-accent-text">{id}</span> was {text}
       </p>
 
       {text === "added to Dislikes" && (
@@ -40,7 +36,7 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
       )}
     </li>
   ) : (
-    <li className="flex items-center justify-between px-[25px] py-[18px] bg-[--background-second-color] rounded-[10px] dark:bg-[--dark-mode-drop-bg]">
+    <li className="log-item-modal">
       {text === 1 && (
         <>
           <div className="flex items-center gap-[10px] ">

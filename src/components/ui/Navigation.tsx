@@ -49,14 +49,14 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
         return (
           <li
             key={link.name}
-            className="flex w-full md:w-auto group flex-col md:items-center gap-[10px]"
+            className="flex w-full md:w-auto flex-col md:items-center gap-[10px]"
           >
             <Link
               className="flex group flex-col items-center gap-[10px]"
               href={link.href}
             >
               <div
-                className={`flex items-center justify-center border-[4px] rounded-[20px] border-solid w-[138px] hidden md:flex group-hover:border-[--background-second-color] h-[198px] ${bgColor} ${
+                className={`home-nav-img-box ${bgColor} ${
                   isActive ? "border-[#FBE0DC]" : "border-[--border-purple]"
                 }`}
               >
@@ -70,9 +70,7 @@ export const Navigation: FC<INavLinks> = ({ navLinks }) => {
                 />
               </div>
               <p
-                className={`py-[10px] w-full md:w-[138px] rounded-[10px] text-[12px] font-medium leading-[1.33] text-center  group-hover:bg-[#FBE0DC] hover:text-[#FF868E] ${
-                  isActive ? active : inActive
-                }`}
+                className={`home-nav-text-box ${isActive ? active : inActive}`}
               >
                 {link.name}
               </p>

@@ -91,8 +91,8 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   return (
     <CollectionNav>
       <section className="flex flex-col gap-[10px] ">
-        <div className="p-[20px] bg-[--background-second-color] rounded-[20px] dark:bg-[--dark-mode-bg]">
-          <div className="flex flex-wrap md:flex-nowrap md:items-center mb-[20px] gap-[10px] ">
+        <div className="breeds-container">
+          <div className="breeds-filter-box">
             <BackBtn title="Breeds" />
 
             <Select
@@ -113,14 +113,14 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
             <button
               type="button"
               onClick={onSortedBtnUpClick}
-              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] dark:bg-[--dark-mode-drop-bg] hover:border-[#FBE0DC] dark:border-[--dark-mode-drop-bg] dark:hover:border-[--dark-mode-second-bg]"
+              className="breeds-filter-sort-btn"
             >
               <SortUp />
             </button>
             <button
               type="button"
               onClick={onSortedBtnDownClick}
-              className="fill-current rounded-[10px] bg-[#F8F8F7] p-[8px] border-[2px] border-solid border-[#F8F8F7] hover:text-[#FF868E] dark:bg-[--dark-mode-drop-bg] hover:border-[#FBE0DC] dark:border-[--dark-mode-drop-bg] dark:hover:border-[--dark-mode-second-bg]"
+              className="breeds-filter-sort-btn"
             >
               <SortDown />
             </button>

@@ -50,12 +50,12 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="favorites-container">
           <BackBtn title="Favorites" />
           <CatsGrid catsData={fav} onClick={onBtnFavClick} isDelBtnNeed />
 
           {Boolean(listItems.length) && (
-            <ul className="flex flex-col gap-[10px] px-[20px] py-[18px] w-full">
+            <ul className="favorites-log-list">
               {listItems.map((item, idx) => {
                 return (
                   <LogItem

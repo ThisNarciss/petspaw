@@ -69,9 +69,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
 
   return (
     <div
-      className={`relative border-[2px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] border-dashed rounded-[20px] flex justify-center items-center cursor-pointer bg-[--background-second-color] w-full h-[167px] md:h-[320px] mb-[20px] dark:bg-[--dark-mode-drop-bg] p-[20px] ${
-        highlight ? "border-[#007bff]" : ""
-      }`}
+      className={`uploader-box ${highlight ? "border-[#007bff]" : ""}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -79,20 +77,14 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
     >
       {!url && (
         <>
-          <div className="absolute  fill-current text-[--background-color] dark:text-[--dark-mode-drop-bg] w-[100px] md:w-[200px] ">
+          <div className="uploader-bg-img">
             <UploadBG />
           </div>
 
           <p className="relative z-[9]">
             {" "}
-            <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
-              Drag here
-            </span>{" "}
-            your file or{" "}
-            <span className="text-[--foreground-second-color] dark:text-[#FFFFFF]">
-              Click here
-            </span>{" "}
-            to upload
+            <span className="uploader-accent-text">Drag here</span> your file or{" "}
+            <span className="uploader-accent-text">Click here</span> to upload
           </p>
         </>
       )}
@@ -105,7 +97,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
       />
       {url && (
         <Image
-          className="h-[147px] md:h-[280px] max-w-[558px] object-cover rounded-[10px]"
+          className="uploader-drop-img"
           src={url}
           alt="downloading cat picture"
           width={558}

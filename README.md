@@ -54,23 +54,24 @@ The project structure is designed to keep the code organized and maintainable. H
 ├── public
 └── src
     ├── components
-    ├── screens
-    ├── utils
-    ├── layout
-    ├── ui
+    ├── pages
+    ├── services
     ├── styles
-    └── svg
+    ├── svg
+    ├── ts
+    └── utils
 ```
 
 - public: Contains static assets like images, fonts, etc.
 - src: The main source code directory.
 
 * components: Reusable React components used throughout the application.
-* screens: Top-level pages/screens of the website.
-* utils: Utility functions and helper modules.
-* layout: Components that define the layout structure of the website.
-* ui: UI components specific to this project.
+* pages: Top-level pages/screens of the website, following Next.js conventions.
+* services: Houses different services used by the application.
 * styles: Global styles and CSS modules. + svg: SVG icons and graphics.
+* svg: SVG icons and graphics.
+* ts: TypeScript files and modules.
+* utils: Utility functions and helper modules.
 
 ## Technologies Used
 

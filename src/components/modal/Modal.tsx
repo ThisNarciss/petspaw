@@ -62,9 +62,7 @@ export const Modal: FC<IProps> = ({ closeModal }) => {
         <button className="modal-close-btn" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="text-center md:text-[36px] text-[--foreground-second-color] font-medium mb-[10px] dark:text-[#FFFFFF]">
-          Upload a .jpg or .png Cat Image
-        </h2>
+        <h2 className="modal-title">Upload a .jpg or .png Cat Image</h2>
         <p className="mb-[40px]">
           Any uploads must comply with the{" "}
           <a className="text-[#FF868E]" href="https://thecatapi.com/privacy">

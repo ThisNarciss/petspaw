@@ -49,69 +49,64 @@ export const Cat: FC = () => {
   return (
     <CollectionNav>
       <section className=" w-full">
-        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px] flex flex-col gap-[20px]">
+        <div className="cat-container">
           <div className="flex items-center gap-[10px]">
             <BackBtn
               title="Breeds"
               bgColor="bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
               color="#FF868E"
             />
-            <div className="py-[5px] text-center px-[5px] w-full md:w-auto md:px-[30px] rounded-[10px] bg-[#FF868E]">
-              <h2 className="uppercase text-[--background-second-color] font-medium tracking-[2px]">
-                {id}
-              </h2>
+            <div className="cat-id-box">
+              <h2 className="cat-id-text">{id}</h2>
             </div>
           </div>
           {Boolean(cat.length) && (
             <div>
-              <div className=" flex  justify-center mb-[50px] relative w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px]">
-                <div className="flex">
+              <div className="cat-img-box">
+                <ul className="flex">
                   {cat.map((item, index) => {
                     return (
-                      <div
+                      <li
                         key={item.id}
-                        className={`rounded-[20px] overflow-hidden w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] absolute top-0 left-0 ${
+                        className={`cat-img-item ${
                           index === currentSlide ? "opacity-100" : "opacity-0"
                         }`}
                       >
                         <Image
-                          className="object-cover w-full h-[166px] md:w-[668px] md:h-[376px] lg:w-[640px] lg:h-[360px] object-center"
+                          className="cat-img"
                           src={`${item.url}`}
                           sizes="100vw"
                           alt="cat picture"
                           width={640}
                           height={360}
+                          priority
                         />
-                      </div>
+                      </li>
                     );
                   })}
-                </div>
-                <div className="p-[10px] bottom-[-15px] absolute flex items-start gap-[5px] z-10 rounded-[20px] bg-[--background-second-color] dark:bg-[#282828]">
+                </ul>
+                <ul className="cat-btn-list">
                   {btnInx.map((item, idx) => {
                     return (
-                      <button
-                        type="button"
-                        key={item}
-                        id={item.toString()}
-                        onClick={onBtnSlideClick}
-                        className={`w-[10px] h-[10px] rounded-[10px] ${
-                          idx === currentSlide
-                            ? "bg-[#FF868E]"
-                            : "bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
-                        } `}
-                      ></button>
+                      <li key={item} className="flex">
+                        <button
+                          type="button"
+                          id={item.toString()}
+                          onClick={onBtnSlideClick}
+                          className={`w-[10px] h-[10px] rounded-[10px] ${
+                            idx === currentSlide
+                              ? "bg-[#FF868E]"
+                              : "bg-[#FBE0DC] dark:bg-[--dark-mode-second-bg]"
+                          } `}
+                        ></button>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               </div>
-
-              <div className="flex flex-col items-center justify-center border-[2px] border-solid rounded-[20px] border-[#FBE0DC] dark:border-[--dark-mode-second-bg] px-[40px] py-[30px] relative">
-                <h2 className="absolute top-[-20px] md:top-[-30px] bg-[--background-second-color] dark:bg-[#282828] px-[40px] py-[5px] rounded-[20px] text-[--foreground-second-color] dark:text-[#FFFFFF] text-[20px] md:text-[36px] font-medium">
-                  {cat[0].breeds[0].name}
-                </h2>
-                <p className="text-[16px] md:text-[20px] text-center font-medium mb-[20px]">
-                  {cat[0].breeds[0].description}
-                </p>
+              <div className="cat-info-box">
+                <h2 className="cat-info-title">{cat[0].breeds[0].name}</h2>
+                <p className="cat-info-desc">{cat[0].breeds[0].description}</p>
                 <div className="flex flex-col md:flex-row items-start gap-[20px]">
                   <p className="max-w-[65%] md:max-w-[50%] text-[16px] ">
                     <span className="font-medium text-[--foreground-second-color] dark:text-[#FFFFFF]">

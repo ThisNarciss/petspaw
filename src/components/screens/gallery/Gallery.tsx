@@ -95,18 +95,18 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   return (
     <CollectionNav>
       <section className={`flex flex-col gap-[10px] w-full `}>
-        <div className="p-[20px] dark:bg-[--dark-mode-bg] bg-[--background-second-color] rounded-[20px]">
+        <div className="gallery-container">
           {isModalOpen && (
             <Portal>
               <Modal closeModal={closeModal} />
             </Portal>
           )}
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-[10px] mb-[10px] md:mb-[20px]">
+          <div className="gallery-head-box">
             <BackBtn title="Gallery" />
             <button
               onClick={openModal}
               type="button"
-              className="w-full md:w-auto px-[30px] flex items-center gap-[10px] py-[12px] bg-[#FBE0DC] rounded-[10px] uppercase text-[#FF868E] fill-current dark:hover:text-[#FFFFFF] dark:bg-[--dark-mode-second-bg] dark:hover:bg-[#FF868E] text-[12px] font-medium leading-4 tracking-[2px] hover:text-[--background-second-color] hover:bg-[#FF868E]"
+              className="gallery-head-btn"
             >
               <Upload />
               Upload

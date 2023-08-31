@@ -91,10 +91,7 @@ export const FilterForm: FC<IProps> = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex items-center flex-wrap justify-between max-w-[668px] rounded-[20px] bg-[#F8F8F7] dark:bg-[--dark-mode-bg] p-[10px] md:p-[20px] gap-[20px] mb-[20px] w-full"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="filter-form">
       <label className="text-[10px] uppercase w-[275px] md:w-[290px]">
         <span className="ml-[10px] leading-[1.8]">Order</span>
         <Select
@@ -138,7 +135,7 @@ export const FilterForm: FC<IProps> = ({
           />
         </label>
 
-        <button className="fill-current bg-[--background-second-color] text-[#FF868E] p-[10px] rounded-[10px] hover:text-[--background-second-color] hover:bg-[#FF868E] focus:text-[--background-second-color] focus:bg-[#FF868E] dark:bg-[--foreground-second-color] dark:hover:bg-[#FF868E] w-full md:w-auto flex items-center justify-center">
+        <button className="filter-form-btn">
           <Reload />
         </button>
       </div>

@@ -7,7 +7,6 @@ import { Dislike } from "@/svg/Dislike";
 import { Favorite } from "@/svg/Favorite";
 import { Like } from "@/svg/Like";
 import { LogItem } from "@/components/log-item/LogItem";
-import { useRouter } from "next/router";
 import { DateService } from "@/services/DateService";
 import { FavoriteFill } from "@/svg/FavoriteFill";
 import { CollectionNav } from "@/components/ui/CollectionNav";
@@ -29,8 +28,6 @@ export const Voting: FC<IProps> = ({ cats }) => {
   const [catsData, setCatsData] = useState(cats);
   const [listItems, setListItems] = useState<IListItem[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const { pathname } = useRouter();
 
   const onBtnClickUpVote = async () => {
     const { hour, min } = DateService.getCurrentTime();
@@ -99,12 +96,12 @@ export const Voting: FC<IProps> = ({ cats }) => {
   return (
     <CollectionNav>
       <section className=" lg:w-full md">
-        <div className="p-[20px] bg-[--background-second-color] dark:bg-[--dark-mode-bg] rounded-[20px]  gap-[20px] flex flex-col">
+        <div className="voting-container">
           <BackBtn title="Voting" />
           <div className="relative mb-[52px]">
-            <div className="flex items-center justify-center rounded-[20px] lg:w-full lg:h-[360px] md:h-[376px] h-[166px] overflow-hidden">
+            <div className="voting-img-box">
               <Image
-                className="rounded-[20px] object-center  object-cover w-full h-full"
+                className="voting-img"
                 id={catsData[0].id}
                 src={catsData[0].url}
                 sizes="100vw"
@@ -112,12 +109,12 @@ export const Voting: FC<IProps> = ({ cats }) => {
                 width={640}
                 height={360}
               />
-              <ul className="flex absolute bottom-[-45px] gap-[4px] border-[4px] border-[--background-second-color] border-solid bg-[--background-second-color] rounded-[20px] dark:border-[--dark-mode-black-color] overflow-hidden">
+              <ul className="voting-list">
                 <li>
                   <button
                     type="button"
                     onClick={onBtnClickUpVote}
-                    className="p-[18px] md:p-[25px] bg-[#97EAB9] text-[--background-second-color] fill-current  hover:bg-[#97eaba5a] hover:text-[#97EAB9]"
+                    className="voting-list-like-btn"
                   >
                     <Like />
                   </button>
@@ -126,7 +123,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickToFavorite}
-                    className={`p-[18px] md:p-[25px] bg-[#FF868E] text-[--background-second-color] fill-current  hover:bg-[#ff868e5a] hover:text-[#FF868E]`}
+                    className={`voting-list-fav-btn`}
                   >
                     {isFavorite ? <FavoriteFill /> : <Favorite />}
                   </button>
@@ -135,7 +132,7 @@ export const Voting: FC<IProps> = ({ cats }) => {
                   <button
                     type="button"
                     onClick={onBtnClickDownVote}
-                    className="p-[18px] md:p-[25px] bg-[#FFD280] text-[--background-second-color] fill-current hover:bg-[#ffd3805a] hover:text-[#FFD280]"
+                    className="voting-list-dis-btn"
                   >
                     <Dislike />
                   </button>

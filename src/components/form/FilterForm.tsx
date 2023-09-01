@@ -56,11 +56,14 @@ export const FilterForm: FC<IProps> = ({
     try {
       setIsLoading(true);
       const result = await CatServices.getGalleryCat(data);
+      if (result.name === "AxiosError") {
+        throw new Error(`${result.message}`);
+      }
       setGallery(result);
       setIsLoading(false);
       reset();
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
       reset();
     }

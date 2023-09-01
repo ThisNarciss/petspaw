@@ -1,5 +1,4 @@
 import React, { useState, FC, FormEvent } from "react";
-import { Notify } from "notiflix";
 import ImageUploader from "../uploader/ImageUploader";
 import { CatServices } from "@/services/CatServices";
 import { LogItem } from "../log-item/LogItem";
@@ -41,6 +40,10 @@ export const Modal: FC<IProps> = ({ closeModal }) => {
       setIsLoading(true);
       if (uploadImg !== undefined) {
         const data = await CatServices.uploadImage(uploadImg);
+        if (data.name === "AxiosError") {
+          throw new Error(`${data.message}`);
+        }
+
         setListItems((prevState) => [
           ...prevState,
           {
@@ -48,10 +51,16 @@ export const Modal: FC<IProps> = ({ closeModal }) => {
           },
         ]);
         setUrl("");
+
         setIsLoading(false);
       }
     } catch (error: any) {
-      Notify.failure(error.message);
+      setListItems((prevState) => [
+        ...prevState,
+        {
+          text: 0,
+        },
+      ]);
       setIsLoading(false);
     }
   };

@@ -41,13 +41,15 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
       }
       setIsLoading(true);
       let prevPage = page - 1;
-
       const data = await CatServices.searchBreeds(breed, lim, prevPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setFindBreeds(data);
       setPage((prevState) => prevState - 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -61,11 +63,16 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
       let nextPage = page + 1;
 
       const data = await CatServices.searchBreeds(breed, lim, nextPage);
+
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
+
       setFindBreeds(data);
       setPage((prevState) => prevState + 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -97,6 +104,9 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
           const { label } = newValue;
 
           const selectedBreed = await CatServices.searchBreeds(label, lim);
+          if (selectedBreed.name === "AxiosError") {
+            throw new Error(`${selectedBreed.message}`);
+          }
           setFindBreeds(selectedBreed);
           setBreed(label);
           setIsLoading(false);
@@ -104,7 +114,7 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
         }
       }
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -121,13 +131,17 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
             breed,
             Number(value)
           );
+          if (selectedBreed.name === "AxiosError") {
+            throw new Error(`${selectedBreed.message}`);
+          }
           setFindBreeds(selectedBreed);
           setLim(Number(value));
           setIsLoading(false);
+          setPage(0);
         }
       }
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };

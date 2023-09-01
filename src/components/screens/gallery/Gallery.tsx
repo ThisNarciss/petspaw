@@ -51,15 +51,15 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
 
   const closeModal = async () => {
     try {
-      setIsLoading(true);
       const data = await CatServices.getUpload();
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       document.body.style.overflow = "auto";
       setGallery(data);
       setIsModalOpen(false);
-      setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
-      setIsLoading(false);
+      Notify.failure(error);
     }
   };
 

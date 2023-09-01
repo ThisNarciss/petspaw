@@ -56,7 +56,7 @@ export const LogItem: FC<IProps> = ({ time, id, text }) => {
               <Error width="20" height="20" />
             </div>
             <p className="text-[16px] leading-6">
-              Copy No Cat found - try a different one
+              No Cat found - try a different one
             </p>
           </div>
         </>

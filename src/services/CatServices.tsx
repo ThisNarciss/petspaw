@@ -15,7 +15,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
   getGalleryCat: async (...rest: any) => {
@@ -35,7 +35,7 @@ export const CatServices = {
 
       return newData;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
   getFavorite: async (limit = 15, page = 0) => {
@@ -47,7 +47,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
   getVotes: async (voting: number, limit = 15, page = 0) => {
@@ -60,7 +60,7 @@ export const CatServices = {
 
       return votedCats;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -71,7 +71,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
   getUpload: async (limit = 15) => {
@@ -89,7 +89,7 @@ export const CatServices = {
 
       return newData;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -103,7 +103,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
   searchBreeds: async (
@@ -165,7 +165,7 @@ export const CatServices = {
       );
       return newData;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -176,7 +176,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -187,7 +187,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -202,7 +202,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 
@@ -213,7 +213,7 @@ export const CatServices = {
 
       return data;
     } catch (error: any) {
-      return error.message;
+      return error;
     }
   },
 };

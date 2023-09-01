@@ -27,12 +27,15 @@ export const Likes: FC<IProps> = ({ likedCats }) => {
       let prevPage = page - 15;
       let prevLimit = limit - 15;
       const data = await CatServices.getVotes(1, prevLimit, prevPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setCats(data);
       setPage((prevState) => prevState - 15);
       setLimit((prevState) => prevState - 15);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -46,12 +49,15 @@ export const Likes: FC<IProps> = ({ likedCats }) => {
       let nextPage = page + 15;
       let nextLimit = limit + 15;
       const data = await CatServices.getVotes(1, nextLimit, nextPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setCats(data);
       setPage((prevState) => prevState + 15);
       setLimit((prevState) => prevState + 15);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };

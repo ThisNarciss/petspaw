@@ -41,11 +41,14 @@ export const Search: FC = () => {
         15,
         prevPage
       );
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setSearchBreeds(data);
       setPage((prevState) => prevState - 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -63,11 +66,14 @@ export const Search: FC = () => {
         15,
         nextPage
       );
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setSearchBreeds(data);
       setPage((prevState) => prevState + 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };

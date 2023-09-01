@@ -60,11 +60,14 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
       setIsLoading(true);
       let prevPage = page - 1;
       const data = await CatServices.getFavorite(15, prevPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setFav(data);
       setPage((prevState) => prevState - 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };
@@ -76,11 +79,14 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
       setIsLoading(true);
       let nextPage = page + 1;
       const data = await CatServices.getFavorite(15, nextPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
       setFav(data);
       setPage((prevState) => prevState + 1);
       setIsLoading(false);
     } catch (error: any) {
-      Notify.failure(error.message);
+      Notify.failure(error);
       setIsLoading(false);
     }
   };

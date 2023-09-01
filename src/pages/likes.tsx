@@ -9,11 +9,7 @@ interface IProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const votes = await CatServices.getVotes();
-
-  const likedCats = votes
-    ?.filter((vote: ICat) => vote.value === 1)
-    .slice(0, 15);
+  const likedCats = await CatServices.getVotes(1);
 
   return {
     props: { likedCats },

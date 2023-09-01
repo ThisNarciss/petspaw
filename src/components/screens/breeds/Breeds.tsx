@@ -10,6 +10,7 @@ import { CatServices } from "@/services/CatServices";
 import { SortDown } from "@/svg/SortDown";
 import { SortUp } from "@/svg/SortUp";
 import { styledSelect } from "@/utils/styledSelect";
+import { Pagination } from "@/components/ui/Pagination";
 
 interface IOption {
   readonly value: string;
@@ -25,11 +26,49 @@ const options = [
 
 export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
   const [findBreeds, setFindBreeds] = useState(searchBreeds);
+  const [page, setPage] = useState(0);
   const [breed, setBreed] = useState("all breeds");
+  const [lim, setLim] = useState(15);
   const [isLoading, setIsLoading] = useState(false);
 
   const selectBreedsStyles = styledSelect({});
   const selectLimitStyles = styledSelect({});
+
+  const onBtnPrevClick = async () => {
+    try {
+      if (page === 0) {
+        return;
+      }
+      setIsLoading(true);
+      let prevPage = page - 1;
+
+      const data = await CatServices.searchBreeds(breed, lim, prevPage);
+      setFindBreeds(data);
+      setPage((prevState) => prevState - 1);
+      setIsLoading(false);
+    } catch (error: any) {
+      Notify.failure(error.message);
+      setIsLoading(false);
+    }
+  };
+
+  const onBtnNextClick = async () => {
+    try {
+      if (findBreeds.length < lim) {
+        return;
+      }
+      setIsLoading(true);
+      let nextPage = page + 1;
+
+      const data = await CatServices.searchBreeds(breed, lim, nextPage);
+      setFindBreeds(data);
+      setPage((prevState) => prevState + 1);
+      setIsLoading(false);
+    } catch (error: any) {
+      Notify.failure(error.message);
+      setIsLoading(false);
+    }
+  };
 
   const onSortedBtnUpClick = () => {
     const sortedBreeds = [...findBreeds].sort((a, b) => {
@@ -57,10 +96,11 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
         if ("label" in newValue) {
           const { label } = newValue;
 
-          const selectedBreed = await CatServices.searchBreeds(label);
+          const selectedBreed = await CatServices.searchBreeds(label, lim);
           setFindBreeds(selectedBreed);
           setBreed(label);
           setIsLoading(false);
+          setPage(0);
         }
       }
     } catch (error: any) {
@@ -77,8 +117,12 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
         if ("value" in newValue) {
           const { value } = newValue;
 
-          const selectedBreed = await CatServices.searchBreeds(breed, value);
+          const selectedBreed = await CatServices.searchBreeds(
+            breed,
+            Number(value)
+          );
           setFindBreeds(selectedBreed);
+          setLim(Number(value));
           setIsLoading(false);
         }
       }
@@ -132,6 +176,13 @@ export const Breeds: FC<IProps> = ({ breedsList, searchBreeds }) => {
               <Loader width="200" height="200" />
             </div>
           )}
+          <Pagination
+            onBtnNextClick={onBtnNextClick}
+            onBtnPrevClick={onBtnPrevClick}
+            page={page}
+            catsLength={findBreeds.length}
+            limit={lim}
+          />
         </div>
       </section>
     </CollectionNav>

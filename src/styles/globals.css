@@ -179,7 +179,7 @@
     @apply h-[206px] md:h-auto relative rounded-[20px] overflow-hidden;
   }
   .cat-grid-img {
-    @apply rounded-[20px] object-center  object-cover w-full h-full;
+    @apply rounded-[20px] object-center object-cover w-full h-full;
   }
   .cat-grid-btn-box {
     @apply absolute top-0 left-0 w-full h-full bg-[--img-hover] rounded-[20px] flex items-center justify-center opacity-0  hover:opacity-100 p-[10px];

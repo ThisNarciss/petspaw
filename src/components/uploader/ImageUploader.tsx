@@ -50,7 +50,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
   const handleImage = (file: File) => {
     const reader = new FileReader();
     const formData = new FormData();
-    formData.append("file", file, "file name");
+    formData.append("file", file, "filename.txt");
 
     if (file.type.startsWith("image/jp") || file.type.startsWith("image/png")) {
       reader.onload = (e) => {

@@ -1,3 +1,4 @@
+import { ICat } from "@/ts/interfaces";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://api.thecatapi.com/v1";
@@ -37,9 +38,11 @@ export const CatServices = {
       return error.message;
     }
   },
-  getFavorite: async (limit: string = "") => {
+  getFavorite: async (limit = 15, page = 0) => {
     try {
-      const response = await axios.get(`/favourites${limit}`);
+      const response = await axios.get(
+        `/favourites?limit=${limit}&page=${page}`
+      );
       const data = response.data;
 
       return data;
@@ -47,12 +50,15 @@ export const CatServices = {
       return error.message;
     }
   },
-  getVotes: async () => {
+  getVotes: async (voting: number, limit = 15, page = 0) => {
     try {
       const response = await axios.get("/votes");
       const data = response.data;
+      const votedCats = data
+        .filter((vote: ICat) => vote.value === voting)
+        .slice(page, limit);
 
-      return data;
+      return votedCats;
     } catch (error: any) {
       return error.message;
     }
@@ -68,7 +74,7 @@ export const CatServices = {
       return error.message;
     }
   },
-  getUpload: async (limit = "15") => {
+  getUpload: async (limit = 15) => {
     try {
       const res = await axios.get(`/images/?limit=${limit}`);
       const data = res.data;
@@ -100,7 +106,12 @@ export const CatServices = {
       return error.message;
     }
   },
-  searchBreeds: async (breed: string = "", limit: string = "15") => {
+  searchBreeds: async (
+    breed = "all breeds",
+    limit = 15,
+    page = 0,
+    order = "RANDOM"
+  ) => {
     try {
       const res = await axios.get(`/breeds`);
 
@@ -114,10 +125,11 @@ export const CatServices = {
           .join(",");
 
         const response = await axios.get(
-          `/images/search?limit=${limit}&breed_ids=${allBreeds}`
+          `/images/search?limit=${limit}&breed_ids=${allBreeds}&page=${page}&order=${order}`
         );
 
         const data = response.data;
+
         const newData = data.map(
           (item: {
             url: string;
@@ -127,13 +139,14 @@ export const CatServices = {
             image: { url: item.url },
             id: item.id,
             breeds: { name: item.breeds[0].name, id: item.breeds[0].id },
+            allBreeds: true,
           })
         );
 
         return newData;
       }
       const response = await axios.get(
-        `/images/search?limit=${limit}&breed_ids=${breedItems.id}`
+        `/images/search?limit=${limit}&breed_ids=${breedItems.id}&page=${page}&order=ASC`
       );
 
       const data = response.data;
@@ -147,6 +160,7 @@ export const CatServices = {
           image: { url: item.url },
           id: item.id,
           breeds: { name: item.breeds[0].name, id: item.breeds[0].id },
+          allBreeds: false,
         })
       );
       return newData;
@@ -154,6 +168,7 @@ export const CatServices = {
       return error.message;
     }
   },
+
   catVotes: async (image_id: string, value: number) => {
     try {
       const response = await axios.post("/votes", { image_id, value });

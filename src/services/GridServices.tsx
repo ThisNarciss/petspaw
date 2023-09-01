@@ -24,7 +24,7 @@ const styles = [
 export const GridServices = {
   imgGridStyles: (arrLength: number, idx: number) => {
     if (arrLength > 0 && idx === 0) {
-      return "col-start-1 row-start-1 row-end-3";
+      return styles[0];
     }
     if (arrLength > 1 && idx === 1) {
       return styles[1];

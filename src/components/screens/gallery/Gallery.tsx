@@ -51,12 +51,15 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
 
   const closeModal = async () => {
     try {
+      setIsLoading(true);
       const data = await CatServices.getUpload();
       document.body.style.overflow = "auto";
       setGallery(data);
       setIsModalOpen(false);
+      setIsLoading(false);
     } catch (error: any) {
       Notify.failure(error.message);
+      setIsLoading(false);
     }
   };
 

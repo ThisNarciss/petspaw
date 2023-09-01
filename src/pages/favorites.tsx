@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const favourite = await CatServices.getFavorite("?limit=15");
+  const favourite = await CatServices.getFavorite();
 
   return {
     props: { favourite },

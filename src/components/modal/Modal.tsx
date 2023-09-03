@@ -40,6 +40,7 @@ export const Modal: FC<IProps> = ({ closeModal }) => {
       setIsLoading(true);
       if (uploadImg !== undefined) {
         const data = await CatServices.uploadImage(uploadImg);
+
         if (data.name === "AxiosError") {
           throw new Error(`${data.message}`);
         }

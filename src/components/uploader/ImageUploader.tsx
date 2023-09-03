@@ -1,5 +1,6 @@
 import { UploadBG } from "@/svg/UploadBg";
 import Image from "next/image";
+import { Notify } from "notiflix";
 import { useState, DragEvent, ChangeEvent, FC, useRef } from "react";
 
 interface ImageUploaderProps {
@@ -30,7 +31,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
     if (file.type.startsWith("image/jp") || file.type.startsWith("image/png")) {
       handleImage(file);
     } else {
-      alert("upload a .jpg or .png cat Image");
+      Notify.info("upload a .jpg or .png cat Image");
     }
   };
 
@@ -50,7 +51,8 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
   const handleImage = (file: File) => {
     const reader = new FileReader();
     const formData = new FormData();
-    formData.append("file", file, "filename.txt");
+
+    formData.append("file", file, file.type);
 
     if (file.type.startsWith("image/jp") || file.type.startsWith("image/png")) {
       reader.onload = (e) => {
@@ -63,7 +65,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onImageUpload, url }) => {
 
       reader.readAsDataURL(file);
     } else {
-      alert("upload a .jpg or .png cat Image");
+      Notify.info("upload a .jpg or .png cat Image");
     }
   };
 

@@ -1,21 +1,24 @@
+import { Cross } from "@/svg/Cross";
 import { Favorite } from "@/svg/Favorite";
 import { FavoriteFill } from "@/svg/FavoriteFill";
 import { ICat } from "@/ts/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC, MouseEvent, ReactNode } from "react";
+import { FC, MouseEvent } from "react";
 
 interface IProps {
   catsData: ICat[];
   onClick?: (e: MouseEvent<HTMLButtonElement>) => Promise<void>;
   isDelBtnNeed?: boolean;
+  onBtnDelClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const CatsGrid: FC<IProps> = ({
   catsData,
   onClick,
   isDelBtnNeed = false,
+  onBtnDelClick,
 }) => {
   const { pathname } = useRouter();
 
@@ -161,14 +164,24 @@ export const CatsGrid: FC<IProps> = ({
                     )}
                     ,
                     {pathname === "/gallery" && (
-                      <button
-                        type="button"
-                        id={item.id.toString()}
-                        onClick={onClick}
-                        className="cat-grid-btn-fav"
-                      >
-                        {<Favorite />}
-                      </button>
+                      <>
+                        <button
+                          onClick={onBtnDelClick}
+                          id={item.id.toString()}
+                          type="button"
+                          className="cat-grid-del-btn"
+                        >
+                          <Cross width="12" height="12" />
+                        </button>
+                        <button
+                          type="button"
+                          id={item.id.toString()}
+                          onClick={onClick}
+                          className="cat-grid-btn-fav"
+                        >
+                          {<Favorite />}
+                        </button>
+                      </>
                     )}
                   </div>
                 )}

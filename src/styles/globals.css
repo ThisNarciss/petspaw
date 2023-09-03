@@ -193,6 +193,9 @@
   .cat-grid-btn-fav {
     @apply fill-current text-[#FF868E] bg-[#FFFFFF] p-[10px] rounded-[10px] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:bg-[#FF868E] hover:bg-[#FF868E] focus:text-[#FFFFFF] dark:bg-[#282828] dark:hover:bg-[#FF868E];
   }
+  .cat-grid-del-btn {
+    @apply absolute top-3 right-3 fill-current text-[#282828] focus:text-[#FFFFFF] hover:text-[#FFFFFF] focus:text-[#FFFFFF];
+  }
   .collection-nav-box {
     @apply flex flex-col gap-[10px] w-full relative overflow-hidden;
   }

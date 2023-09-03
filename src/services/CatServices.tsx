@@ -21,7 +21,11 @@ export const CatServices = {
   getGalleryCat: async (...rest: any) => {
     try {
       const response = await axios.get(
-        `/images/search?limit=${rest[0].limit}&order=${rest[0].order}&breed_ids=${rest[0].breed}&mime_types=${rest[0].type}`
+        `/images/search?limit=${rest[0].limit}&order=${
+          rest[0].order
+        }&breed_ids=${
+          rest[0].breed === "none" ? "" : rest[0].breed
+        }&mime_types=${rest[0].type}&page=${rest[1]?.page}`
       );
       const data = response.data;
 
@@ -74,9 +78,9 @@ export const CatServices = {
       return error;
     }
   },
-  getUpload: async (limit = 15) => {
+  getUpload: async (limit = 15, page = 0) => {
     try {
-      const res = await axios.get(`/images/?limit=${limit}`);
+      const res = await axios.get(`/images?limit=${limit}&page=${page}`);
       const data = res.data;
 
       const newData = data.map(
@@ -209,6 +213,29 @@ export const CatServices = {
   delFromFavorite: async (image_id: number) => {
     try {
       const response = await axios.delete(`/favourites/${image_id}`);
+      const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  },
+  delUpload: async (image_id: string) => {
+    try {
+      const response = await axios.delete(`/images/${image_id}`);
+      const data = response.data;
+
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  },
+
+  loadImageAnalysis: async (image_id: number) => {
+    try {
+      const response = await axios.get(
+        `https://api.thecatapi.com/v1/images/${image_id}/analysis`
+      );
       const data = response.data;
 
       return data;

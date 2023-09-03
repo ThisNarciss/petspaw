@@ -12,6 +12,7 @@ import { LogItem } from "@/components/log-item/LogItem";
 import { DateService } from "@/services/DateService";
 import { Loader } from "@/components/loader/Loader";
 import { FilterForm } from "@/components/form/FilterForm";
+import { Pagination } from "@/components/ui/Pagination";
 
 interface IProps {
   breedsList: { value: string; label: string }[];
@@ -43,6 +44,24 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [gallery, setGallery] = useState(uploadGallery);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
+
+  const onBtnDelClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    try {
+      setIsLoading(true);
+      const { id } = e.currentTarget;
+      await CatServices.delUpload(id);
+      const data = await CatServices.getUpload();
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
+      setGallery(data);
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+      Notify.failure(error);
+    }
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -57,6 +76,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
       }
       document.body.style.overflow = "auto";
       setGallery(data);
+      setPage(0);
       setIsModalOpen(false);
     } catch (error: any) {
       Notify.failure(error);
@@ -64,34 +84,77 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
   };
 
   const onBtnToFavClick = async (e: MouseEvent<HTMLButtonElement>) => {
-    const { id } = e.currentTarget;
-    const { hour, min } = DateService.getCurrentTime();
-    const favorite = await CatServices.getFavorite();
+    try {
+      const { id } = e.currentTarget;
+      const { hour, min } = DateService.getCurrentTime();
+      const favorite = await CatServices.getFavorite();
 
-    const findFavCat: IFavCat = favorite.find(
-      (cat: IFavCat) => cat.image_id === id
-    );
+      const findFavCat: IFavCat = favorite.find(
+        (cat: IFavCat) => cat.image_id === id
+      );
 
-    if (!findFavCat) {
-      await CatServices.addToFavorite(id);
-      setListItems((prevState) => [
-        ...prevState,
-        {
-          id,
-          time: `${hour}:${min}`,
-          text: "added to Favorites",
-        },
-      ]);
-    } else {
-      await CatServices.delFromFavorite(findFavCat.id);
-      setListItems((prevState) => [
-        ...prevState,
-        {
-          id,
-          time: `${hour}:${min}`,
-          text: "removed from Favorites",
-        },
-      ]);
+      if (!findFavCat) {
+        await CatServices.addToFavorite(id);
+        setListItems((prevState) => [
+          ...prevState,
+          {
+            id,
+            time: `${hour}:${min}`,
+            text: "added to Favorites",
+          },
+        ]);
+      } else {
+        await CatServices.delFromFavorite(findFavCat.id);
+        setListItems((prevState) => [
+          ...prevState,
+          {
+            id,
+            time: `${hour}:${min}`,
+            text: "removed from Favorites",
+          },
+        ]);
+      }
+    } catch (error: any) {
+      Notify.failure(error);
+    }
+  };
+
+  const onBtnPrevClick = async () => {
+    try {
+      if (page === 0) {
+        return;
+      }
+      setIsLoading(true);
+      let prevPage = page - 1;
+      const data = await CatServices.getUpload(15, prevPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
+      setGallery(data);
+      setPage((prevState) => prevState - 1);
+      setIsLoading(false);
+    } catch (error: any) {
+      Notify.failure(error);
+      setIsLoading(false);
+    }
+  };
+  const onBtnNextClick = async () => {
+    try {
+      if (gallery.length < 15) {
+        return;
+      }
+      setIsLoading(true);
+      let nextPage = page + 1;
+      const data = await CatServices.getUpload(15, nextPage);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
+      setGallery(data);
+      setPage((prevState) => prevState + 1);
+      setIsLoading(false);
+    } catch (error: any) {
+      Notify.failure(error);
+      setIsLoading(false);
     }
   };
 
@@ -124,6 +187,7 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
             <CatsGrid
               catsData={gallery}
               onClick={onBtnToFavClick}
+              onBtnDelClick={onBtnDelClick}
               isDelBtnNeed
             />
           ) : (
@@ -131,6 +195,13 @@ export const Gallery: FC<IProps> = ({ uploadGallery, breedsList }) => {
               <Loader width="200" height="200" />
             </div>
           )}
+          <Pagination
+            page={page}
+            catsLength={gallery.length}
+            onBtnNextClick={onBtnNextClick}
+            onBtnPrevClick={onBtnPrevClick}
+            limit={15}
+          />
           {Boolean(listItems.length) && (
             <ul className="flex flex-col gap-[10px]">
               {listItems.map((item, idx) => {

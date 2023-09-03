@@ -35,21 +35,33 @@ export const Favorites: FC<IProps> = ({ favourite }) => {
   const [page, setPage] = useState(0);
 
   const onBtnFavClick = async (e: MouseEvent<HTMLButtonElement>) => {
-    const id = Number(e.currentTarget.id);
+    try {
+      setIsLoading(true);
+      const id = Number(e.currentTarget.id);
 
-    await CatServices.delFromFavorite(id);
-    const data = await CatServices.getFavorite(15);
-    setFav(data);
+      await CatServices.delFromFavorite(id);
+      const data = await CatServices.getFavorite(15, page);
 
-    const { hour, min } = DateService.getCurrentTime();
-    setListItems((prevState) => [
-      ...prevState,
-      {
-        id: id.toString(),
-        time: `${hour}:${min}`,
-        text: "removed from Favorites",
-      },
-    ]);
+      if (data.name === "AxiosError") {
+        throw new Error(`${data.message}`);
+      }
+
+      setFav(data);
+
+      const { hour, min } = DateService.getCurrentTime();
+      setListItems((prevState) => [
+        ...prevState,
+        {
+          id: id.toString(),
+          time: `${hour}:${min}`,
+          text: "removed from Favorites",
+        },
+      ]);
+      setIsLoading(false);
+    } catch (error: any) {
+      Notify.failure(error);
+      setIsLoading(false);
+    }
   };
 
   const onBtnPrevClick = async () => {
